@@ -1,0 +1,59 @@
+{
+  "name": "Shree Radha Raman Ji Vrindavan",
+  "short_name": "Radha Raman Ji",
+  "description": "Live darshan, aarti timings, Japa Mala & divine blessings from Shree Radha Raman Ji Vrindavan Dham",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#020C18",
+  "theme_color": "#00CED1",
+  "lang": "en-IN",
+  "categories": ["lifestyle", "religion", "spirituality"],
+  "icons": [
+    { "src": "icons/icon-16.png",   "sizes": "16x16",   "type": "image/png" },
+    { "src": "icons/icon-32.png",   "sizes": "32x32",   "type": "image/png" },
+    { "src": "icons/icon-192.png",  "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-512.png",  "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/desktop.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "Shree Radha Raman Ji — Desktop"
+    },
+    {
+      "src": "screenshots/mobile.jpg",
+      "sizes": "390x844",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Shree Radha Raman Ji — Mobile"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Today's Darshan",
+      "short_name": "Darshan",
+      "description": "View today's darshan photos",
+      "url": "/#darshan",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Aarti Timings",
+      "short_name": "Aarti",
+      "description": "View aarti timings",
+      "url": "/#timings",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Japa Mala",
+      "short_name": "Mala",
+      "description": "Open Japa Mala counter",
+      "url": "/#mala-section",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

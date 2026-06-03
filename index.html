@@ -1379,6 +1379,39 @@ img  { max-width: 100%; height: auto; display: block; }
 .map-temple-name { font-family:'Cinzel Decorative',cursive; font-size:1.1rem; color:#A8C0FF; display:block; margin-bottom:.4rem; }
 .map-temple-desc { font-family:'Cormorant Garamond',serif; font-size:1rem; color:rgba(180,205,255,.8); line-height:1.7; }
 
+/* ════════ DATE FILTER & VISITOR DARSHAN SELECTOR ════════ */
+.darshan-filter-bar {
+  max-width: 900px; margin: 0 auto 1.5rem; display: flex;
+  align-items: center; justify-content: center; gap: .8rem; flex-wrap: wrap;
+  padding: .8rem 1.2rem; background: rgba(6,10,45,.7);
+  border: 1px solid rgba(100,130,220,.2); border-radius: 12px;
+}
+.darshan-filter-label {
+  font-family: 'Cormorant Garamond', serif; font-size: .88rem;
+  color: rgba(160,190,255,.65); letter-spacing: .1em; white-space: nowrap;
+}
+.darshan-date-input {
+  background: rgba(8,14,55,.7); border: 1px solid rgba(100,140,220,.3);
+  border-radius: 6px; padding: .45rem .9rem; color: #C8D4FF;
+  font-family: 'Cormorant Garamond', serif; font-size: .95rem;
+  outline: none; cursor: pointer; transition: border-color .3s;
+  color-scheme: dark;
+}
+.darshan-date-input:focus { border-color: rgba(140,170,255,.65); }
+.darshan-date-clear {
+  padding: .4rem 1rem; background: rgba(255,80,80,.1);
+  border: 1px solid rgba(255,100,100,.3); color: #FF9999;
+  font-family: 'Cormorant Garamond', serif; font-size: .85rem;
+  border-radius: 20px; cursor: pointer; transition: all .25s; white-space: nowrap;
+}
+.darshan-date-clear:hover { background: rgba(255,80,80,.22); }
+.darshan-date-clear.hidden { display: none; }
+.darshan-filter-result {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-size: .85rem; color: rgba(140,190,255,.6); letter-spacing: .06em;
+  text-align: center; min-height: 1.2em; margin-bottom: .5rem;
+}
+
 /* ════════ 10. PHOTO FRAME ════════ */
 #frame-section { background:linear-gradient(180deg,rgba(3,5,20,0),rgba(10,14,60,.3),rgba(3,5,20,0)); }
 .frame-wrap { max-width:780px; margin:0 auto; }
@@ -1711,6 +1744,14 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
     <div id="jbStatus">📋 JSONBin: <span id="jbStatusText" style="color:#888;">Checking…</span></div>
     <div id="lastUploadStatus" style="margin-top:.5rem;color:rgba(200,220,255,.6);font-size:.85rem;"></div>
   </div>
+  <!-- Date Filter Bar (visible to all visitors) -->
+  <div class="darshan-filter-bar">
+    <span class="darshan-filter-label">📅 Kisi bhi din ka darshan dekhein:</span>
+    <input type="date" class="darshan-date-input" id="darshanDateFilter" title="Select date to view darshan">
+    <button class="darshan-date-clear hidden" id="darshanDateClear">✕ Clear</button>
+  </div>
+  <div class="darshan-filter-result" id="darshanFilterResult"></div>
+
   <!-- Tabs -->
   <div class="darshan-tabs">
     <button class="tab-btn active" data-tab="shrinagar">✨ Shrinagar Darshan</button>
@@ -2676,8 +2717,15 @@ async function handleFiles(files) {
       } else {
         // Show exact error in admin panel
         const errEl = document.getElementById('lastUploadStatus');
-        if (errEl) errEl.innerHTML = `<span style="color:#FF6B6B">❌ Cloudinary failed: ${result.error}</span><br><span style="color:#FFD700">👉 Fix this in Cloudinary dashboard, then re-upload.</span>`;
-        showToast(`❌ Cloud upload failed: ${result.error}`);
+        let helpMsg = result.error || 'Unknown error';
+        // Common error hints
+        if (helpMsg.includes('unsigned') || helpMsg.includes('preset') || helpMsg.includes('Upload preset')) {
+          helpMsg += ' → Cloudinary dashboard mein "darshan_upload" preset ko UNSIGNED mode mein set karein.';
+        } else if (helpMsg.includes('cloud_name') || helpMsg.includes('not found')) {
+          helpMsg += ' → CLOUDINARY_CLOUD_NAME check karein, aapka correct cloud name paste karein.';
+        }
+        if (errEl) errEl.innerHTML = `<span style="color:#FF6B6B">❌ Cloudinary failed: ${helpMsg}</span><br><span style="color:#FFD700">👉 Jab tak Cloudinary fix nahi hota, photos sirf is device par dikhenge.</span>`;
+        showToast(`❌ Cloud upload failed — photos sirf is phone pe saved`);
         finalSrc = compressed; // device-only fallback
       }
     } else {
@@ -2800,16 +2848,31 @@ async function deleteImage(id, tab, event) {
 }
 
 // =====================================================================
-// 🖼️  RENDER GALLERY
+// 🖼️  RENDER GALLERY  (with optional date filter)
 // =====================================================================
+let activeDateFilter = null; // 'YYYY-MM-DD' or null
+
 function renderGallery(tab) {
   const grid = document.getElementById('grid-' + tab);
   if (!grid) return;
-  const imgs = galleryData[tab];
+  let imgs = galleryData[tab];
+
+  // Apply date filter if set
+  if (activeDateFilter) {
+    imgs = imgs.filter(img => {
+      const d = new Date(img.ts);
+      const imgDate = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      return imgDate === activeDateFilter;
+    });
+  }
+
   if (!imgs || imgs.length === 0) {
+    const msg = activeDateFilter
+      ? `Is din (${activeDateFilter}) ka koi darshan photo nahi mila. Doosra date try karein 🙏`
+      : (isAdminMode ? 'Upload photos above — they\'ll be saved permanently! 🙏' : 'No darshan photos yet — check back soon 🙏');
     grid.innerHTML = `<div class="empty-gallery">
       <span class="empty-gallery-icon">${tabIcons[tab]}</span>
-      <p>${isAdminMode ? 'Upload photos above — they\'ll be saved permanently! 🙏' : 'No darshan photos yet — check back soon 🙏'}</p>
+      <p>${msg}</p>
     </div>`;
     return;
   }
@@ -2843,7 +2906,9 @@ function renderGallery(tab) {
     `;
     wrap.querySelector('.gallery-card').addEventListener('click', e => {
       if (e.target.closest('.action-btn') || e.target.closest('.card-insta-badge')) return;
-      openLightbox(tab, i);
+      // Find real index in full galleryData (not filtered)
+      const realIndex = galleryData[tab].findIndex(p => p.id === img.id);
+      openLightbox(tab, realIndex >= 0 ? realIndex : i);
     });
     grid.appendChild(wrap);
   });
@@ -3014,6 +3079,53 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.getElementById('panel-' + activeTab).classList.add('active');
   });
 });
+
+// =====================================================================
+// 📅 DATE FILTER — visitors can browse darshan by date
+// =====================================================================
+(function initDateFilter() {
+  const dateInput  = document.getElementById('darshanDateFilter');
+  const clearBtn   = document.getElementById('darshanDateClear');
+  const resultEl   = document.getElementById('darshanFilterResult');
+  if (!dateInput) return;
+
+  // Set max date to today
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+  dateInput.max = todayStr;
+
+  function applyFilter(dateVal) {
+    activeDateFilter = dateVal || null;
+    if (dateVal) {
+      clearBtn.classList.remove('hidden');
+      const d = new Date(dateVal + 'T00:00:00');
+      const label = d.toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+      // Count how many photos exist for this date across all tabs
+      let totalCount = 0;
+      Object.keys(galleryData).forEach(tab => {
+        totalCount += (galleryData[tab] || []).filter(img => {
+          const id = new Date(img.ts);
+          const imgDate = `${id.getFullYear()}-${String(id.getMonth()+1).padStart(2,'0')}-${String(id.getDate()).padStart(2,'0')}`;
+          return imgDate === dateVal;
+        }).length;
+      });
+      if (resultEl) resultEl.textContent = totalCount > 0
+        ? `📸 ${label} — ${totalCount} darshan photo${totalCount > 1 ? 's' : ''} mila 🙏`
+        : `📅 ${label} — Is din ka koi darshan nahi mila`;
+    } else {
+      clearBtn.classList.add('hidden');
+      if (resultEl) resultEl.textContent = '';
+    }
+    // Re-render all tabs
+    Object.keys(galleryData).forEach(renderGallery);
+  }
+
+  dateInput.addEventListener('change', e => applyFilter(e.target.value));
+  clearBtn.addEventListener('click', () => {
+    dateInput.value = '';
+    applyFilter('');
+  });
+})();
 
 // =====================================================================
 // TOAST

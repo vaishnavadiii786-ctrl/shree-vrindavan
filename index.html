@@ -2331,7 +2331,7 @@ async function deleteFromCloudinary(publicId) {
 // =====================================================================
 const JB_BASE = 'https://api.jsonbin.io/v3/b';
 const JB_CACHE_KEY = 'shree_jb_cache';
-const JB_CACHE_TTL = 5 * 60 * 1000; // 5 minutes — only hits JSONBin once per 5 min
+const JB_CACHE_TTL = 30 * 1000; // 30 seconds — so new photos appear quickly for all visitors
 
 async function loadFromJSONBin() {
   if (!JB_READY) return null;
@@ -2371,8 +2371,10 @@ async function saveToJSONBin(allPhotos) {
       // Always save as {photos:[], version:1} — JSONBin requires non-empty object
       body: JSON.stringify({ photos: allPhotos, version: 1, updatedAt: Date.now() })
     });
-    // Invalidate cache so next load fetches fresh data
+    // Invalidate cache so every device fetches fresh data on next load
     localStorage.removeItem(JB_CACHE_KEY);
+    // Also reset in-memory cache so current session sees fresh data too
+    allPhotosCache = null;
   } catch(e) {
     // Silently ignore — photos are still saved in localStorage as fallback
   }
@@ -2382,13 +2384,14 @@ async function saveToJSONBin(allPhotos) {
 let allPhotosCache = null;
 
 async function getAllPhotos() {
-  if (allPhotosCache !== null) return allPhotosCache;
+  // Always fetch fresh from cloud (JSONBin TTL=30s handles rate limiting).
+  // In-memory cache removed — new photos must be visible to ALL visitors immediately.
 
-  // Load local first (always available, instant)
+  // Load local first (instant fallback while cloud loads)
   let local = [];
   try { local = JSON.parse(localStorage.getItem('shree_photos_v3') || '[]'); } catch { local = []; }
 
-  // Try cloud silently — merge if available
+  // Always try cloud silently — merge if available
   try {
     const remote = await loadFromJSONBin();
     if (remote && remote.length > 0) {

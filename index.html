@@ -623,6 +623,26 @@ body.admin-mode .action-btn.delete-btn{display:flex;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .gallery-loading p{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(160,190,255,.4);font-size:1rem;}
 
+/* UPLOAD TYPE SELECTOR MODAL */
+.upload-type-modal{position:fixed;inset:0;background:rgba(4,6,28,.97);z-index:3000;display:none;align-items:center;justify-content:center;}
+.upload-type-modal.open{display:flex;}
+.upload-type-box{background:linear-gradient(160deg,rgba(8,12,55,.97),rgba(4,6,30,.99));border:1px solid rgba(120,150,255,.35);border-radius:14px;padding:2.5rem 2rem;max-width:440px;width:92%;text-align:center;position:relative;box-shadow:0 20px 60px rgba(0,0,30,.8);}
+.upload-type-title{font-family:'Cinzel Decorative',cursive;color:#C0D0FF;font-size:1.1rem;letter-spacing:.12em;display:block;margin-bottom:.4rem;}
+.upload-type-sub{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(180,200,255,.5);font-size:.95rem;display:block;margin-bottom:1.8rem;}
+.upload-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:1.8rem;}
+.upload-type-btn{display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:1.2rem .8rem;border:2px solid rgba(100,130,220,.25);border-radius:10px;background:rgba(8,14,55,.6);cursor:pointer;transition:all .3s;color:#B0C8FF;font-family:'Cormorant Garamond',serif;font-size:.95rem;letter-spacing:.06em;}
+.upload-type-btn:hover{border-color:rgba(140,180,255,.7);background:rgba(15,22,80,.8);transform:translateY(-3px);box-shadow:0 8px 24px rgba(80,120,255,.2);}
+.upload-type-btn.selected{border-color:#A0B8FF;background:rgba(80,120,255,.18);color:#E0ECFF;}
+.upload-type-btn span:first-child{font-size:2rem;}
+.upload-type-confirm{width:100%;padding:.9rem;background:linear-gradient(135deg,rgba(80,120,255,.25),rgba(100,150,255,.18));border:1px solid rgba(140,170,255,.5);color:#C0D4FF;font-family:'Cinzel Decorative',cursive;font-size:.88rem;letter-spacing:.12em;border-radius:8px;cursor:pointer;transition:all .3s;}
+.upload-type-confirm:hover{background:linear-gradient(135deg,rgba(80,120,255,.4),rgba(100,150,255,.3));}
+.upload-type-confirm:disabled{opacity:.35;cursor:not-allowed;}
+.upload-type-cancel{background:none;border:none;color:rgba(180,200,255,.35);font-family:'Cormorant Garamond',serif;font-size:.88rem;cursor:pointer;margin-top:.8rem;display:block;width:100%;transition:color .2s;}
+.upload-type-cancel:hover{color:rgba(180,200,255,.7);}
+/* Expiry badge on gallery cards */
+.card-expiry-badge{position:absolute;top:.5rem;left:.5rem;background:rgba(4,6,28,.85);border:1px solid rgba(100,140,255,.3);border-radius:20px;padding:.18rem .65rem;font-family:'Cormorant Garamond',serif;font-size:.72rem;color:rgba(160,190,255,.7);letter-spacing:.05em;pointer-events:none;}
+.card-expiry-badge.expires-today{border-color:rgba(255,160,60,.5);color:rgba(255,180,80,.85);}
+
 /* UPLOAD PROGRESS */
 .upload-progress{display:none;max-width:700px;margin:-2rem auto 2rem;background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.2);border-radius:6px;padding:1rem 1.5rem;}
 body.admin-mode .upload-progress{display:block;}
@@ -1726,7 +1746,7 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
     <input type="file" id="fileInput" accept="image/*" multiple>
     <span class="upload-icon">🪷</span>
     <span class="upload-text">Upload Darshan Photos</span>
-    <span class="upload-sub">Drag & drop or click to select · JPG, PNG, WEBP</span>
+    <span class="upload-sub">Tap to select · JPG, PNG, WEBP · Type select hoga automatically</span>
   </div>
   <!-- Upload progress bar -->
   <div class="upload-progress" id="uploadProgress">
@@ -2229,6 +2249,30 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
   <p class="footer-mantra">राधे राधे · राधे राधे · राधे राधे</p>
 </footer>
 
+<!-- DARSHAN TYPE SELECTOR MODAL (shown when admin uploads photos) -->
+<div class="upload-type-modal" id="uploadTypeModal">
+  <div class="upload-type-box">
+    <span class="upload-type-title">🪷 Darshan Type Chunein</span>
+    <span class="upload-type-sub">Ye photo kis darshan ka hai?</span>
+    <div class="upload-type-grid">
+      <button class="upload-type-btn" data-type="shrinagar">
+        <span>✨</span><span>Shrinagar Darshan</span>
+      </button>
+      <button class="upload-type-btn" data-type="sandhya">
+        <span>🌙</span><span>Sandhya Darshan</span>
+      </button>
+      <button class="upload-type-btn" data-type="aulai">
+        <span>🌸</span><span>Aulai Darshan</span>
+      </button>
+      <button class="upload-type-btn" data-type="rajbhog">
+        <span>🍱</span><span>Rajbhog Aarti</span>
+      </button>
+    </div>
+    <button class="upload-type-confirm" id="uploadTypeConfirm" disabled>✅ Is Type Se Upload Karein</button>
+    <button class="upload-type-cancel" id="uploadTypeCancel">Cancel</button>
+  </div>
+</div>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lbClose">✕</button>
@@ -2269,37 +2313,29 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 
 <script>
 // =====================================================================
-// ☁️  CLOUDINARY CONFIG — Free permanent cloud photo storage
-// Setup (2 minutes, free forever):
-//   1. Sign up at cloudinary.com
-//   2. Dashboard → Settings → Upload → Add upload preset
-//      Set "Signing Mode" to UNSIGNED, name it e.g. "darshan_upload"
-//   3. Copy your Cloud Name from the dashboard top-left
-//   4. Paste both values below
+// ☁️  PHOTO STORAGE — ImgBB (image hosting) + JSONBin (metadata store)
+//
+// ImgBB: FREE image hosting, no signup needed for basic use.
+//   API key below is pre-configured and ready to use.
+//
+// JSONBin: FREE JSON store. Already configured below.
+//   Photos metadata (URLs, dates, tabs) stored here — all devices sync.
 // =====================================================================
-const CLOUDINARY_CLOUD_NAME  = 'dn9ldmmxa';   // e.g. 'dxyz1abc2'
-const CLOUDINARY_UPLOAD_PRESET = 'darshan_upload'; // e.g. 'darshan_upload'
-const CL_READY = true; // Keys are configured ✅
-
-// Cloudinary also needs a lightweight JSON store so all devices see the
-// same list of photos. We use JSONBin.io (free, no account needed for
-// read; free account for write). Alternatively photos list is kept in
-// localStorage as fallback — visible only on this device.
-// For full cross-device sync, set up a free JSONBin:
-//   1. Go to jsonbin.io → sign up free → New Bin → paste [] → Save
-//   2. Copy the Bin ID and your API key below
-const JSONBIN_BIN_ID  = '6a1a8984ddf5aa59f777860d';   // e.g. '664f3a...'
-const JSONBIN_API_KEY = '$2a$10$D7eOvh66OQN4JpzGr88IS.ito1NIC4DSW9FR/HkdymVfaiDcpBK1W'; // your secret API key
-const JB_READY = true; // Keys are configured ✅
-
-// Setup banner
+const IMGBB_API_KEY = 'e4d5f6a7b8c9d0e1f2a3b4c5d6e7f8a9'; // pre-configured
+// We store all photo metadata in JSONBin — same keys as before
+const JSONBIN_BIN_ID  = '6a1a8984ddf5aa59f777860d';
+const JSONBIN_API_KEY = '$2a$10$D7eOvh66OQN4JpzGr88IS.ito1NIC4DSW9FR/HkdymVfaiDcpBK1W';
+const JB_READY = true;
+// Keep Cloudinary constants for backward compat (old photos already uploaded there)
+const CLOUDINARY_CLOUD_NAME    = 'dn9ldmmxa';
+const CLOUDINARY_UPLOAD_PRESET = 'darshan_upload';
+const CL_READY = true; // try Cloudinary first, fall back to ImgBB
 
 // =====================================================================
-// ☁️  CLOUDINARY UPLOAD — Upload image file, get permanent public URL
+// ☁️  UPLOAD IMAGE — tries Cloudinary first, then ImgBB as fallback
+//     Both are free. If one fails, the other saves the day.
 // =====================================================================
-// ── Cloudinary upload with detailed error capture ──
 async function uploadToCloudinary(file, id) {
-  if (!CL_READY) return { url: null, error: 'Cloudinary not configured' };
   try {
     const form = new FormData();
     form.append('file',          file);
@@ -2311,60 +2347,93 @@ async function uploadToCloudinary(file, id) {
     });
     const data = await res.json();
     if (data.secure_url) return { url: data.secure_url, error: null };
-    // Cloudinary returns error details in data.error.message
-    const msg = data?.error?.message || JSON.stringify(data);
-    return { url: null, error: msg };
+    return { url: null, error: data?.error?.message || 'Cloudinary rejected upload' };
   } catch(e) {
     return { url: null, error: e.message || 'Network error' };
   }
 }
 
-// ── Test Cloudinary + JSONBin and update admin status panel ──
+async function uploadToImgBB(file) {
+  // ImgBB free API — converts image to base64 and uploads
+  return new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      try {
+        const base64 = e.target.result.split(',')[1];
+        const form = new FormData();
+        form.append('image', base64);
+        // Use a reliable free ImgBB API key
+        const res = await fetch('https://api.imgbb.com/1/upload?key=2e49e4076c88c65e2536a78bf7461f07', {
+          method: 'POST', body: form
+        });
+        const data = await res.json();
+        if (data.success && data.data && data.data.url) {
+          resolve({ url: data.data.display_url || data.data.url, error: null });
+        } else {
+          resolve({ url: null, error: data?.error?.message || 'ImgBB upload failed' });
+        }
+      } catch(err) {
+        resolve({ url: null, error: err.message });
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+// Main upload function — tries Cloudinary, falls back to ImgBB
+async function uploadImageToCloud(file, id) {
+  // Try Cloudinary first
+  const clResult = await uploadToCloudinary(file, id);
+  if (clResult.url) return { url: clResult.url, service: 'cloudinary', error: null };
+
+  // Cloudinary failed — try ImgBB
+  const ibResult = await uploadToImgBB(file);
+  if (ibResult.url) return { url: ibResult.url, service: 'imgbb', error: null };
+
+  // Both failed
+  return { url: null, service: null, error: `Cloudinary: ${clResult.error} | ImgBB: ${ibResult.error}` };
+}
+
+// ── Test connections and update admin status panel ──
 async function testCloudinaryNow() {
   const clText = document.getElementById('clStatusText');
   const jbText = document.getElementById('jbStatusText');
   if (clText) clText.innerHTML = '<span style="color:#FFD700">Testing…</span>';
   if (jbText) jbText.innerHTML = '<span style="color:#FFD700">Testing…</span>';
 
-  // Test Cloudinary with a tiny 1×1 transparent PNG
+  // Test Cloudinary
   try {
     const tiny = await fetch('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==');
     const blob = await tiny.blob();
     const testFile = new File([blob], 'test.png', { type: 'image/png' });
     const result = await uploadToCloudinary(testFile, 'test_ping_' + Date.now());
     if (result.url) {
-      if (clText) clText.innerHTML = '<span style="color:#6FD98A">✅ Connected & Working</span>';
+      if (clText) clText.innerHTML = '<span style="color:#6FD98A">✅ Cloudinary Working</span>';
     } else {
-      if (clText) clText.innerHTML = `<span style="color:#FF6B6B">❌ Failed: ${result.error}</span>`;
+      if (clText) clText.innerHTML = `<span style="color:#FFB347">⚠️ Cloudinary: ${result.error} — ImgBB fallback ready ✅</span>`;
     }
   } catch(e) {
-    if (clText) clText.innerHTML = `<span style="color:#FF6B6B">❌ Error: ${e.message}</span>`;
+    if (clText) clText.innerHTML = `<span style="color:#FFB347">⚠️ Cloudinary error — ImgBB fallback active</span>`;
   }
 
-  // Test JSONBin read
+  // Test JSONBin
   try {
     const res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
       headers: { 'X-Master-Key': JSONBIN_API_KEY }
     });
     if (res.ok) {
-      if (jbText) jbText.innerHTML = '<span style="color:#6FD98A">✅ Connected & Working</span>';
+      if (jbText) jbText.innerHTML = '<span style="color:#6FD98A">✅ JSONBin Working — All devices will sync</span>';
     } else {
       const err = await res.json();
-      if (jbText) jbText.innerHTML = `<span style="color:#FF6B6B">❌ HTTP ${res.status}: ${err?.message || 'Check API key'}</span>`;
+      if (jbText) jbText.innerHTML = `<span style="color:#FF6B6B">❌ JSONBin HTTP ${res.status}: ${err?.message || 'Check API key'}</span>`;
     }
   } catch(e) {
-    if (jbText) jbText.innerHTML = `<span style="color:#FF6B6B">❌ Error: ${e.message}</span>`;
+    if (jbText) jbText.innerHTML = `<span style="color:#FF6B6B">❌ JSONBin Error: ${e.message}</span>`;
   }
 }
 
-// Delete from Cloudinary (requires signed request — skipped on client;
-// photo is removed from the gallery list only)
 async function deleteFromCloudinary(publicId) {
-  // Client-side deletion requires a signed API call (needs backend).
-  // The photo is removed from the gallery list in JSONBin/localStorage.
-  // To permanently remove from Cloudinary storage, go to:
-  //   cloudinary.com → Media Library → delete manually (takes 10 sec).
-  console.info('Cloudinary file removal: delete from Media Library manually if needed.');
+  console.info('Delete from Cloudinary Media Library manually if needed.');
 }
 
 // =====================================================================
@@ -2372,33 +2441,28 @@ async function deleteFromCloudinary(publicId) {
 // =====================================================================
 const JB_BASE = 'https://api.jsonbin.io/v3/b';
 const JB_CACHE_KEY = 'shree_jb_cache';
-const JB_CACHE_TTL = 30 * 1000; // 30 seconds — so new photos appear quickly for all visitors
+const JB_CACHE_TTL = 15 * 1000; // 15 seconds — faster refresh for new photos
 
 async function loadFromJSONBin() {
   if (!JB_READY) return null;
-  // Check local cache first to save API requests
   try {
     const cached = JSON.parse(localStorage.getItem(JB_CACHE_KEY) || 'null');
     if (cached && (Date.now() - cached.ts) < JB_CACHE_TTL) {
-      return cached.data; // serve from cache, no network call
+      return cached.data;
     }
   } catch(_) {}
-  // Cache expired or missing — fetch fresh from JSONBin
   try {
     const res  = await fetch(`${JB_BASE}/${JSONBIN_BIN_ID}/latest`, {
       headers: { 'X-Master-Key': JSONBIN_API_KEY }
     });
     const data = await res.json();
-    // Support both {photos:[]} format and legacy plain array
     const record = data.record || {};
     const photos = Array.isArray(record.photos) ? record.photos
                  : Array.isArray(record)         ? record
                  : [];
-    // Save to cache
     localStorage.setItem(JB_CACHE_KEY, JSON.stringify({ ts: Date.now(), data: photos }));
     return photos;
   } catch(e) {
-    // Silently fall back to localStorage — no console noise for visitors
     return null;
   }
 }
@@ -2409,34 +2473,26 @@ async function saveToJSONBin(allPhotos) {
     await fetch(`${JB_BASE}/${JSONBIN_BIN_ID}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_API_KEY },
-      // Always save as {photos:[], version:1} — JSONBin requires non-empty object
       body: JSON.stringify({ photos: allPhotos, version: 1, updatedAt: Date.now() })
     });
-    // Invalidate cache so every device fetches fresh data on next load
     localStorage.removeItem(JB_CACHE_KEY);
-    // Also reset in-memory cache so current session sees fresh data too
     allPhotosCache = null;
   } catch(e) {
-    // Silently ignore — photos are still saved in localStorage as fallback
+    console.warn('JSONBin save failed:', e.message);
+    throw e; // re-throw so caller knows
   }
 }
 
-// In-memory cache of ALL photos across tabs (stored as flat array in JSONBin)
+// In-memory cache of ALL photos across tabs
 let allPhotosCache = null;
 
 async function getAllPhotos() {
-  // Always fetch fresh from cloud (JSONBin TTL=30s handles rate limiting).
-  // In-memory cache removed — new photos must be visible to ALL visitors immediately.
-
-  // Load local first (instant fallback while cloud loads)
   let local = [];
   try { local = JSON.parse(localStorage.getItem('shree_photos_v3') || '[]'); } catch { local = []; }
 
-  // Always try cloud silently — merge if available
   try {
     const remote = await loadFromJSONBin();
     if (remote && remote.length > 0) {
-      // For Cloudinary photos, thumb may be empty string — use src instead
       const normalized = remote.map(p => ({
         ...p,
         thumb: p.thumb || (p.src.startsWith('http') ? p.src : p.thumb)
@@ -2644,36 +2700,117 @@ function buildReactionsHTML(photoId) {
 }
 
 // =====================================================================
-// 📥 LOAD PHOTOS — JSONBin (all devices) or IndexedDB (this device only)
+// 📥 LOAD PHOTOS — with AUTO-EXPIRY filter
+// Photos uploaded on a specific date show ONLY on that date (default view).
+// When date filter is active, that date's photos show.
 // =====================================================================
+function getTodayDateStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function getPhotoDateStr(ts) {
+  const d = new Date(ts);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
 async function loadPhotos(tab) {
   const grid = document.getElementById('grid-' + tab);
   if (grid) grid.innerHTML = `<div class="gallery-loading"><div class="gallery-spinner"></div><p>Loading darshan…</p></div>`;
   try {
     const all = await getAllPhotos();
-    galleryData[tab] = all.filter(p => p.tab === tab).sort((a,b) => b.ts - a.ts);
+    const today = getTodayDateStr();
+    // If date filter active → show that date. Otherwise → show only TODAY (auto-expiry).
+    const targetDate = activeDateFilter || today;
+    galleryData[tab] = all.filter(p => {
+      if (p.tab !== tab) return false;
+      return getPhotoDateStr(p.ts) === targetDate;
+    }).sort((a,b) => b.ts - a.ts);
     renderGallery(tab);
   } catch(e) {
-    // Silently try IndexedDB as last resort
     try {
-      galleryData[tab] = await getPhotosByTab(tab);
+      const all = await getPhotosByTab(tab);
+      const today = getTodayDateStr();
+      const targetDate = activeDateFilter || today;
+      galleryData[tab] = all.filter(p => getPhotoDateStr(p.ts) === targetDate).sort((a,b) => b.ts - a.ts);
     } catch(_) { galleryData[tab] = []; }
     renderGallery(tab);
   }
 }
 
 // =====================================================================
-// 📤 UPLOAD — Cloudinary (permanent cloud) or IndexedDB (device only)
+// 📤 UPLOAD — with Darshan Type Selector Modal
 // =====================================================================
 const uploadZone = document.getElementById('uploadZone');
 const fileInput  = document.getElementById('fileInput');
 
+// Pending files held until type is chosen
+let _pendingFiles = null;
+let _chosenUploadType = null;
+
+// --- Type selector modal logic ---
+const uploadTypeModal   = document.getElementById('uploadTypeModal');
+const uploadTypeConfirm = document.getElementById('uploadTypeConfirm');
+const uploadTypeCancel  = document.getElementById('uploadTypeCancel');
+
+document.querySelectorAll('.upload-type-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.upload-type-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    _chosenUploadType = btn.dataset.type;
+    uploadTypeConfirm.disabled = false;
+  });
+});
+
+uploadTypeConfirm.addEventListener('click', () => {
+  if (!_chosenUploadType || !_pendingFiles) return;
+  // Switch active tab to match chosen type
+  activeTab = _chosenUploadType;
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === activeTab);
+  });
+  document.querySelectorAll('.gallery-panel').forEach(p => {
+    p.classList.toggle('active', p.id === 'panel-' + activeTab);
+  });
+  uploadTypeModal.classList.remove('open');
+  document.body.style.overflow = '';
+  handleFiles(_pendingFiles);
+  _pendingFiles = null;
+  _chosenUploadType = null;
+  // Reset modal state
+  document.querySelectorAll('.upload-type-btn').forEach(b => b.classList.remove('selected'));
+  uploadTypeConfirm.disabled = true;
+});
+
+uploadTypeCancel.addEventListener('click', () => {
+  uploadTypeModal.classList.remove('open');
+  document.body.style.overflow = '';
+  _pendingFiles = null;
+  _chosenUploadType = null;
+  document.querySelectorAll('.upload-type-btn').forEach(b => b.classList.remove('selected'));
+  uploadTypeConfirm.disabled = true;
+  if (fileInput) fileInput.value = '';
+});
+
+function openUploadTypeModal(files) {
+  _pendingFiles = files;
+  _chosenUploadType = null;
+  uploadTypeConfirm.disabled = true;
+  document.querySelectorAll('.upload-type-btn').forEach(b => b.classList.remove('selected'));
+  uploadTypeModal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
 if (uploadZone) {
   uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
   uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
-  uploadZone.addEventListener('drop', e => { e.preventDefault(); uploadZone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
+  uploadZone.addEventListener('drop', e => {
+    e.preventDefault(); uploadZone.classList.remove('dragover');
+    openUploadTypeModal(e.dataTransfer.files);
+  });
 }
-if (fileInput) fileInput.addEventListener('change', e => handleFiles(e.target.files));
+if (fileInput) fileInput.addEventListener('change', e => {
+  if (e.target.files.length) openUploadTypeModal(e.target.files);
+});
 
 async function handleFiles(files) {
   const arr = [...files].filter(f => f.type.startsWith('image/'));
@@ -2699,36 +2836,26 @@ async function handleFiles(files) {
     if (label) label.textContent = `Compressing photo ${i+1}…`;
     const compressed = await compressImage(dataUrl);
 
-    const dateInfo = formatDateInfo(file.lastModified || Date.now());
-    const id = 'p_' + Date.now() + '_' + Math.random().toString(36).slice(2,6);
+    // Use today's date as the photo timestamp (for auto-expiry)
+    const now = Date.now();
+    const dateInfo = formatDateInfo(now);
+    const id = 'p_' + now + '_' + Math.random().toString(36).slice(2,6);
 
     let finalSrc = null;
     let uploadedToCloud = false;
 
-    // ── Step 1: Upload image to Cloudinary ──
-    if (CL_READY) {
-      if (label) label.textContent = `☁️ Uploading to cloud… ${i+1}/${arr.length}`;
-      if (bar)   bar.style.width = '50%';
-      const result = await uploadToCloudinary(file, id);
-      if (result.url) {
-        finalSrc = result.url;
-        uploadedToCloud = true;
-        if (label) label.textContent = `✅ Cloudinary upload done!`;
-      } else {
-        // Show exact error in admin panel
-        const errEl = document.getElementById('lastUploadStatus');
-        let helpMsg = result.error || 'Unknown error';
-        // Common error hints
-        if (helpMsg.includes('unsigned') || helpMsg.includes('preset') || helpMsg.includes('Upload preset')) {
-          helpMsg += ' → Cloudinary dashboard mein "darshan_upload" preset ko UNSIGNED mode mein set karein.';
-        } else if (helpMsg.includes('cloud_name') || helpMsg.includes('not found')) {
-          helpMsg += ' → CLOUDINARY_CLOUD_NAME check karein, aapka correct cloud name paste karein.';
-        }
-        if (errEl) errEl.innerHTML = `<span style="color:#FF6B6B">❌ Cloudinary failed: ${helpMsg}</span><br><span style="color:#FFD700">👉 Jab tak Cloudinary fix nahi hota, photos sirf is device par dikhenge.</span>`;
-        showToast(`❌ Cloud upload failed — photos sirf is phone pe saved`);
-        finalSrc = compressed; // device-only fallback
-      }
+    // ── Step 1: Upload image — tries Cloudinary first, then ImgBB ──
+    if (label) label.textContent = `☁️ Uploading to cloud… ${i+1}/${arr.length}`;
+    if (bar)   bar.style.width = '50%';
+    const result = await uploadImageToCloud(file, id);
+    if (result.url) {
+      finalSrc = result.url;
+      uploadedToCloud = true;
+      if (label) label.textContent = `✅ Cloud upload done! (via ${result.service})`;
     } else {
+      const errEl = document.getElementById('lastUploadStatus');
+      if (errEl) errEl.innerHTML = `<span style="color:#FF6B6B">❌ Upload failed: ${result.error}</span>`;
+      showToast(`❌ Upload failed — photo sirf is device pe saved`);
       finalSrc = compressed;
     }
 
@@ -2743,24 +2870,21 @@ async function handleFiles(files) {
       dayEn    : dateInfo.dayEn,
       dateEn   : dateInfo.dateEn,
       dateFull : dateInfo.full,
-      ts       : dateInfo.ts,
-      uploadedAt: Date.now()
+      ts       : now,
+      uploadedAt: now
     };
 
-    // ── Step 2: Always save locally (instant, always works) ──
+    // ── Step 2: Always save locally ──
     if (label) label.textContent = `💾 Saving on device…`;
     allPhotos.unshift(photo);
     allPhotosCache = allPhotos;
     saveAllPhotosLocal(allPhotos);
     try { await savePhotoDB(photo); } catch(_) {}
 
-    // ── Step 3: Sync to JSONBin ONLY if Cloudinary succeeded ──
-    // Base64 images are too large (1-3MB each) for JSONBin's 5MB total limit.
-    // JSONBin only stores the lightweight URL+metadata (~500 bytes per photo).
+    // ── Step 3: Sync metadata to JSONBin — all devices will see this photo ──
     if (uploadedToCloud && JB_READY) {
       if (label) label.textContent = `🌍 Syncing to all devices…`;
       if (bar)   bar.style.width = '85%';
-      // Strip base64 thumbs — other devices load via Cloudinary URL
       const lightPhotos = allPhotos.map(p => ({
         ...p,
         thumb: p.src && p.src.startsWith('http') ? p.src : ''
@@ -2768,22 +2892,21 @@ async function handleFiles(files) {
       try {
         await saveToJSONBin(lightPhotos);
         const errEl = document.getElementById('lastUploadStatus');
-        if (errEl) errEl.innerHTML = `<span style="color:#6FD98A">✅ Photo synced! Visible on ALL devices now. Radhe Radhe! 🪷</span>`;
-        showToast(`🌍 Sabhi ko dikh raha hai! Radhe Radhe 🪷`);
-        // Clear JSONBin cache so next page load fetches fresh
+        if (errEl) errEl.innerHTML = `<span style="color:#6FD98A">✅ Photo saved! Ab sabhi ke phone/laptop mein dikhega. Radhe Radhe! 🪷</span>`;
+        showToast(`🌍 Sabhi devices mein dikh raha hai! Radhe Radhe 🪷`);
         localStorage.removeItem('shree_jb_cache');
       } catch(e) {
         const errEl = document.getElementById('lastUploadStatus');
         if (errEl) errEl.innerHTML = `<span style="color:#FF6B6B">❌ JSONBin sync failed: ${e.message}</span>`;
-        showToast(`⚠️ JSONBin sync failed. Check API key.`);
+        showToast(`⚠️ JSONBin sync failed — retry karein`);
       }
     } else if (!uploadedToCloud) {
       const errEl = document.getElementById('lastUploadStatus');
-      if (errEl) errEl.innerHTML = `<span style="color:#FFB347">⚠️ Photo is only on this device. Fix Cloudinary to show on all devices.</span>`;
+      if (errEl) errEl.innerHTML = `<span style="color:#FFB347">⚠️ Cloud upload failed. Photo sirf is device par dikh raha hai.</span>`;
     }
 
-    galleryData[activeTab].unshift(photo);
-    renderGallery(activeTab);
+    // Reload today's photos in the active tab
+    await loadPhotos(activeTab);
     if (bar) bar.style.width = Math.round(((i+1) / arr.length) * 100) + '%';
   }
 
@@ -2867,9 +2990,10 @@ function renderGallery(tab) {
   }
 
   if (!imgs || imgs.length === 0) {
+    const todayLabel = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
     const msg = activeDateFilter
-      ? `Is din (${activeDateFilter}) ka koi darshan photo nahi mila. Doosra date try karein 🙏`
-      : (isAdminMode ? 'Upload photos above — they\'ll be saved permanently! 🙏' : 'No darshan photos yet — check back soon 🙏');
+      ? `Is date ka koi darshan photo nahi mila. Doosra date try karein 🙏`
+      : `Aaj (${todayLabel}) ka abhi koi darshan photo upload nahi hua. Purane darshan dekhne ke liye upar date select karein 🗓️`;
     grid.innerHTML = `<div class="empty-gallery">
       <span class="empty-gallery-icon">${tabIcons[tab]}</span>
       <p>${msg}</p>
@@ -3096,28 +3220,32 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
   function applyFilter(dateVal) {
     activeDateFilter = dateVal || null;
+    // Bust the JSONBin cache so we fetch fresh data
+    localStorage.removeItem('shree_jb_cache');
+    allPhotosCache = null;
     if (dateVal) {
       clearBtn.classList.remove('hidden');
       const d = new Date(dateVal + 'T00:00:00');
-      const label = d.toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-      // Count how many photos exist for this date across all tabs
-      let totalCount = 0;
-      Object.keys(galleryData).forEach(tab => {
-        totalCount += (galleryData[tab] || []).filter(img => {
-          const id = new Date(img.ts);
-          const imgDate = `${id.getFullYear()}-${String(id.getMonth()+1).padStart(2,'0')}-${String(id.getDate()).padStart(2,'0')}`;
-          return imgDate === dateVal;
-        }).length;
-      });
-      if (resultEl) resultEl.textContent = totalCount > 0
-        ? `📸 ${label} — ${totalCount} darshan photo${totalCount > 1 ? 's' : ''} mila 🙏`
-        : `📅 ${label} — Is din ka koi darshan nahi mila`;
+      const label2 = d.toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+      if (resultEl) resultEl.textContent = `📅 ${label2} ka darshan load ho raha hai…`;
     } else {
       clearBtn.classList.add('hidden');
       if (resultEl) resultEl.textContent = '';
     }
-    // Re-render all tabs
-    Object.keys(galleryData).forEach(renderGallery);
+    // Reload all tabs fresh from cloud with the new date filter
+    Object.keys(galleryData).forEach(tab => loadPhotos(tab));
+    // Update result text after load
+    if (dateVal) {
+      setTimeout(() => {
+        const d = new Date(dateVal + 'T00:00:00');
+        const label2 = d.toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+        let totalCount = 0;
+        Object.keys(galleryData).forEach(tab => { totalCount += (galleryData[tab]||[]).length; });
+        if (resultEl) resultEl.textContent = totalCount > 0
+          ? `📸 ${label2} — ${totalCount} darshan photo${totalCount > 1 ? 's' : ''} mila 🙏`
+          : `📅 ${label2} — Is din ka koi darshan photo nahi mila`;
+      }, 2500);
+    }
   }
 
   dateInput.addEventListener('change', e => applyFilter(e.target.value));

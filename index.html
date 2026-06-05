@@ -183,8 +183,18 @@
 }
 </script>
 
-<!-- PWA Install prompt only (SW removed to avoid 404) -->
+<!-- PWA: Service Worker + Install Prompt -->
 <script>
+// ── Service Worker Registration ──────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then(reg => console.log('🙏 SW registered, scope:', reg.scope))
+      .catch(err => console.warn('SW registration failed:', err));
+  });
+}
+
+// ── Install Prompt ───────────────────────────────────────────────────
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
@@ -764,6 +774,48 @@ footer{padding:4rem 2rem 2rem;text-align:center;background:linear-gradient(to to
 ::-webkit-scrollbar{width:5px;}
 ::-webkit-scrollbar-track{background:#050814;}
 ::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,rgba(120,160,255,.45),rgba(80,120,220,.35));border-radius:3px;}
+
+/* ═══════════════════════════════════════════════
+   DAILY SHLOKA ROTATOR
+═══════════════════════════════════════════════ */
+#shloka-section{padding:4rem 2rem;position:relative;z-index:2;overflow:hidden;}
+#shloka-section::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,5,20,0),rgba(30,10,60,.25),rgba(3,5,20,0));pointer-events:none;}
+.shloka-card{max-width:720px;margin:0 auto;text-align:center;position:relative;border:1px solid rgba(180,140,255,.2);border-radius:20px;padding:3rem 2.5rem 2rem;background:linear-gradient(145deg,rgba(20,10,50,.55),rgba(8,4,30,.7));backdrop-filter:blur(12px);box-shadow:0 0 60px rgba(120,60,255,.08),0 0 0 1px rgba(120,80,255,.06);}
+.shloka-card::before{content:'✦ आज का श्लोक ✦';position:absolute;top:-0.85rem;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#2A0060,#0C0025);border:1px solid rgba(180,140,255,.3);color:rgba(200,170,255,.8);font-family:'Cormorant Garamond',serif;font-size:.78rem;letter-spacing:.22em;padding:.25rem 1.2rem;border-radius:20px;white-space:nowrap;}
+.shloka-day-badge{display:inline-block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.82rem;color:rgba(180,155,255,.55);letter-spacing:.18em;margin-bottom:1.4rem;}
+.shloka-sanskrit{font-family:'Noto Serif Devanagari',serif;font-size:clamp(1.1rem,3vw,1.45rem);color:#D4C0FF;line-height:2;letter-spacing:.04em;text-shadow:0 0 30px rgba(160,100,255,.3);margin-bottom:.9rem;animation:shlokaFade 1s ease both;}
+.shloka-divider{width:80px;height:1px;background:linear-gradient(90deg,transparent,rgba(180,140,255,.45),transparent);margin:.8rem auto;}
+.shloka-meaning{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,2.5vw,1.18rem);color:rgba(220,210,255,.75);line-height:1.85;margin-bottom:.7rem;animation:shlokaFade 1s ease .2s both;}
+.shloka-source{font-family:'Cormorant Garamond',serif;font-size:.85rem;color:rgba(160,130,255,.45);letter-spacing:.12em;}
+.shloka-nav{display:flex;align-items:center;justify-content:center;gap:1.2rem;margin-top:1.8rem;}
+.shloka-nav-btn{background:rgba(120,80,255,.1);border:1px solid rgba(140,100,255,.25);color:rgba(180,155,255,.75);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.1rem;transition:all .25s;display:flex;align-items:center;justify-content:center;}
+.shloka-nav-btn:hover{background:rgba(120,80,255,.25);border-color:rgba(180,140,255,.5);color:#D4C0FF;transform:scale(1.1);}
+.shloka-dots{display:flex;gap:.5rem;}
+.shloka-dot{width:6px;height:6px;border-radius:50%;background:rgba(140,100,255,.25);transition:all .3s;cursor:pointer;}
+.shloka-dot.active{background:rgba(180,140,255,.75);transform:scale(1.3);}
+@keyframes shlokaFade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
+/* ═══════════════════════════════════════════════
+   TRENDING LANDING STRIP — Stats & Social Proof
+═══════════════════════════════════════════════ */
+#trending-strip{padding:2.5rem 2rem;position:relative;z-index:2;background:linear-gradient(180deg,rgba(3,5,20,0),rgba(10,4,30,.4),rgba(3,5,20,0));}
+.trending-inner{max-width:1000px;margin:0 auto;}
+.trending-heading{text-align:center;font-family:'Cinzel Decorative',cursive;font-size:clamp(.65rem,1.8vw,.85rem);color:rgba(180,160,255,.5);letter-spacing:.3em;margin-bottom:2rem;}
+.trending-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem;}
+.tstat{text-align:center;padding:1.5rem 1rem;border:1px solid rgba(120,80,255,.18);border-radius:14px;background:rgba(15,8,40,.5);backdrop-filter:blur(8px);transition:transform .3s,border-color .3s,box-shadow .3s;position:relative;overflow:hidden;}
+.tstat::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(140,80,255,.07),transparent 60%);pointer-events:none;}
+.tstat:hover{transform:translateY(-4px);border-color:rgba(180,130,255,.4);box-shadow:0 12px 40px rgba(100,50,200,.18);}
+.tstat-num{font-family:'Cinzel Decorative',cursive;font-size:clamp(1.8rem,4vw,2.5rem);background:linear-gradient(135deg,#D0B0FF,#A080FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1;}
+.tstat-label{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:rgba(180,165,255,.6);letter-spacing:.1em;margin-top:.4rem;display:block;}
+.tstat-icon{font-size:1.6rem;display:block;margin-bottom:.7rem;}
+
+/* ═══════════════════════════════════════════════
+   ACCESSIBILITY — skip link & focus styles
+═══════════════════════════════════════════════ */
+.skip-link{position:absolute;top:-100px;left:1rem;background:var(--cosmic-blue);color:var(--gold);padding:.6rem 1.2rem;border-radius:4px;border:1px solid var(--gold);font-family:'Cormorant Garamond',serif;font-size:1rem;z-index:9999;transition:top .2s;}
+.skip-link:focus{top:1rem;}
+:focus-visible{outline:2px solid rgba(180,140,255,.8);outline-offset:3px;border-radius:3px;}
+
 
 /* ═══════════════════════════════════════════════════════
    LIVE VRINDAVAN TIME AURA — inline in hero, no fixed/blur
@@ -1563,6 +1615,7 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 
 <canvas id="cosmicCanvas"></canvas>
 <div id="petals-container"></div>
@@ -1571,13 +1624,14 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 
 
 <!-- NAV -->
-<nav id="navbar">
+<nav id="navbar" aria-label="Main navigation">
   <div class="nav-logo">☸ SHREE</div>
   <ul class="nav-links">
     <li><a href="#hero">Home</a></li>
     <li><a href="#about">Parichay</a></li>
     <li><a href="#timings">Aarti</a></li>
     <li><a href="#darshan">Darshan</a></li>
+    <li><a href="#shloka-section">Shloka</a></li>
     <li><a href="#mala-section">Japa Mala</a></li>
     <li><a href="#ashirwad-section">Ashirwad</a></li>
     <li><a href="#timer-section">Timer</a></li>
@@ -1673,6 +1727,7 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 </section>
 
 <!-- ABOUT -->
+<main id="main-content">
 <section id="about">
   <div class="section-header">
     <span class="section-eyebrow">परिचय</span>
@@ -1694,6 +1749,71 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
         <div class="temple-card-sub">राधा रमण जी</div>
         <div style="margin-top:1.5rem;font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(255,248,231,.5);font-size:.85rem;text-align:center;padding:0 1rem;line-height:1.7;">"Vrindavan dhaam ki jai ho,<br>Radhe Radhe!"</div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     TRENDING LANDING STRIP
+═══════════════════════════════════════════════════════════════════ -->
+<section id="trending-strip" aria-label="Devotee community stats">
+  <div class="trending-inner">
+    <p class="trending-heading">🪷 &nbsp; SHREE RADHA RAMAN JI — VRINDAVAN DHAM &nbsp; 🪷</p>
+    <div class="trending-stats" role="list">
+      <div class="tstat" role="listitem">
+        <span class="tstat-icon" aria-hidden="true">🙏</span>
+        <span class="tstat-num" id="tstatDevotees">1542</span>
+        <span class="tstat-label">Year of Manifestation</span>
+      </div>
+      <div class="tstat" role="listitem">
+        <span class="tstat-icon" aria-hidden="true">🕯️</span>
+        <span class="tstat-num" id="tstatDiyas">—</span>
+        <span class="tstat-label">Diyas Lit Today</span>
+      </div>
+      <div class="tstat" role="listitem">
+        <span class="tstat-icon" aria-hidden="true">📿</span>
+        <span class="tstat-num" id="tstatMalas">—</span>
+        <span class="tstat-label">Malas Completed</span>
+      </div>
+      <div class="tstat" role="listitem">
+        <span class="tstat-icon" aria-hidden="true">🌸</span>
+        <span class="tstat-num">5</span>
+        <span class="tstat-label">Aarti Sevas Daily</span>
+      </div>
+      <div class="tstat" role="listitem">
+        <span class="tstat-icon" aria-hidden="true">🗓️</span>
+        <span class="tstat-num" id="tstatDays">—</span>
+        <span class="tstat-label">Days of Unbroken Flame</span>
+      </div>
+      <div class="tstat" role="listitem">
+        <span class="tstat-icon" aria-hidden="true">🪷</span>
+        <span class="tstat-num" id="tstatPrayers">—</span>
+        <span class="tstat-label">Prayers Offered</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     DAILY SHLOKA ROTATOR
+═══════════════════════════════════════════════════════════════════ -->
+<section id="shloka-section" aria-label="Daily shloka from the scriptures">
+  <div class="section-header">
+    <span class="section-eyebrow">आज का श्लोक</span>
+    <h2 class="section-title">Daily Shloka</h2>
+    <div class="section-divider"><div class="divider-lotus">📖</div></div>
+  </div>
+  <div class="shloka-card" aria-live="polite" aria-atomic="true">
+    <span class="shloka-day-badge" id="shlokaDayBadge"></span>
+    <p class="shloka-sanskrit" id="shlokaSanskrit" lang="hi"></p>
+    <div class="shloka-divider" aria-hidden="true"></div>
+    <p class="shloka-meaning" id="shlokaMeaning"></p>
+    <span class="shloka-source" id="shlokaSource"></span>
+    <div class="shloka-nav" role="group" aria-label="Shloka navigation">
+      <button class="shloka-nav-btn" id="shlokaPrev" aria-label="Previous shloka">‹</button>
+      <div class="shloka-dots" id="shlokaDots" role="tablist" aria-label="Shloka indicators"></div>
+      <button class="shloka-nav-btn" id="shlokaNext" aria-label="Next shloka">›</button>
     </div>
   </div>
 </section>
@@ -1837,7 +1957,7 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
   </div>
   <div class="mala-wrap">
     <div class="mala-complete-flash" id="malaFlash"></div>
-    <canvas id="malaCanvas" width="420" height="420"></canvas>
+    <canvas id="malaCanvas" role="button" aria-label="Japa Mala — click to count beads" tabindex="0" width="420" height="420"></canvas>
     <div class="mala-counter-display" id="malaCount">0</div>
     <div class="mala-sub">beads chanted</div>
     <div class="mala-malas" id="malaMalasDisplay">Complete a mala of 108 to begin</div>
@@ -2097,7 +2217,7 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 <!-- ADMIN MODAL -->
 <div class="admin-modal" id="adminModal">
   <div class="admin-box">
-    <button class="admin-close" id="adminClose">✕</button>
+    <button class="admin-close" id="adminClose" aria-label="Close admin panel">✕</button>
     <span class="admin-icon-lock">🔒</span>
     <span class="admin-box-title">Admin Access</span>
     <span class="admin-box-sub">Enter the secret key to manage photos</span>
@@ -2108,7 +2228,8 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 </div>
 
 <!-- FOOTER -->
-<footer>
+</main>
+<footer role="contentinfo">
   <span class="footer-om">ॐ</span>
   <div class="footer-title">SHREE</div>
   <div class="footer-subtitle">Radha Raman Ji · Vrindavan Dham · Since Samvat 1599</div>
@@ -2189,9 +2310,9 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lbClose">✕</button>
-  <button class="lb-nav lb-prev" id="lbPrev">‹</button>
-  <button class="lb-nav lb-next" id="lbNext">›</button>
+  <button class="lightbox-close" id="lbClose" aria-label="Close lightbox">✕</button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous image">‹</button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next image">›</button>
   <img class="lightbox-img" id="lbImg" src="" alt="">
   <div class="lightbox-info">
     <div class="lightbox-title" id="lbTitle"></div>
@@ -4741,6 +4862,169 @@ document.addEventListener('mousemove', e => {
 
   renderGrid();
 })();
+
+
+// ═══════════════════════════════════════════════════════════════════
+// 📖 DAILY SHLOKA ROTATOR
+// ═══════════════════════════════════════════════════════════════════
+(function initShloka() {
+  const SHLOKAS = [
+    {
+      sanskrit: 'यदा यदा हि धर्मस्य ग्लानिर्भवति भारत।\nअभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥',
+      meaning: 'Whenever there is a decline in righteousness and an increase in unrighteousness, O Arjuna, at that time I manifest Myself on earth.',
+      source: '— Bhagavad Gita 4.7'
+    },
+    {
+      sanskrit: 'सर्वधर्मान्परित्यज्य मामेकं शरणं व्रज।\nअहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥',
+      meaning: 'Abandon all varieties of dharma and simply surrender unto Me. I shall deliver you from all sinful reactions; do not fear.',
+      source: '— Bhagavad Gita 18.66'
+    },
+    {
+      sanskrit: 'मन्मना भव मद्भक्तो मद्याजी मां नमस्कुरु।\nमामेवैष्यसि युक्त्वैवमात्मानं मत्परायणः॥',
+      meaning: 'Always think of Me, be devoted to Me, worship Me, bow down to Me. So shall you come to Me; I promise you truly, for you are dear to Me.',
+      source: '— Bhagavad Gita 9.34'
+    },
+    {
+      sanskrit: 'राधे राधे राधे श्याम, मिला दो राधे राधे।\nवृंदावन की कुंज गलिन में, खेलत नित नव राधे।',
+      meaning: 'O Radhe, O Radhe — unite me with Shyam, O Radhe. In the groves of Vrindavan, Radha and Shyam play their eternal loving pastimes.',
+      source: '— Vrindavan Bhajan'
+    },
+    {
+      sanskrit: 'श्रीकृष्णः शरणं मम।\nराधा-कृष्ण युगल प्रभु, हमारे जीवन के आधार।',
+      meaning: 'Shri Krishna is my refuge. The divine couple Radha-Krishna are the very foundation of our lives.',
+      source: '— Vaishnava Stotra'
+    },
+    {
+      sanskrit: 'हरे कृष्ण हरे कृष्ण, कृष्ण कृष्ण हरे हरे।\nहरे राम हरे राम, राम राम हरे हरे॥',
+      meaning: 'The Maha Mantra — chanting the holy names of the Lord is the supreme method of spiritual upliftment in this age of Kali.',
+      source: '— Kali-santarana Upanishad'
+    },
+    {
+      sanskrit: 'नमामि राधां मदलेखलेखिभिः, कृतालिकुञ्जे कुसुमावतंसिताम्।\nसुनादयन्तीं वनराजिमञ्जुना, स्वरेण तां वेणुरवाभिरामिणीम्॥',
+      meaning: 'I bow to Srimati Radharani, adorned with flowers in the bowers of Vrindavan, filling the beautiful forest groves with melodious sound.',
+      source: '— Radha Stuti'
+    }
+  ];
+
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const today = new Date();
+  // Pick today's shloka deterministically by day-of-year
+  const dayOfYear = Math.floor((today - new Date(today.getFullYear(),0,0)) / 86400000);
+  let currentIdx = dayOfYear % SHLOKAS.length;
+
+  function renderShloka(idx, animate) {
+    const s = SHLOKAS[idx];
+    const badge = document.getElementById('shlokaDayBadge');
+    const sk = document.getElementById('shlokaSanskrit');
+    const mn = document.getElementById('shlokaMeaning');
+    const src = document.getElementById('shlokaSource');
+    const dots = document.getElementById('shlokaDots');
+    if (!sk) return;
+
+    if (badge) badge.textContent = days[today.getDay()] + ', ' + today.toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+
+    if (animate) {
+      sk.style.animation = 'none'; mn.style.animation = 'none';
+      sk.offsetHeight; mn.offsetHeight;
+      sk.style.animation = ''; mn.style.animation = '';
+    }
+
+    sk.textContent = s.sanskrit;
+    mn.textContent = s.meaning;
+    if (src) src.textContent = s.source;
+
+    // Update dots
+    if (dots) {
+      dots.innerHTML = '';
+      SHLOKAS.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'shloka-dot' + (i === idx ? ' active' : '');
+        d.setAttribute('role','tab');
+        d.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+        d.setAttribute('aria-label', 'Shloka ' + (i + 1));
+        d.addEventListener('click', () => { currentIdx = i; renderShloka(i, true); });
+        dots.appendChild(d);
+      });
+    }
+  }
+
+  document.getElementById('shlokaPrev')?.addEventListener('click', () => {
+    currentIdx = (currentIdx - 1 + SHLOKAS.length) % SHLOKAS.length;
+    renderShloka(currentIdx, true);
+  });
+  document.getElementById('shlokaNext')?.addEventListener('click', () => {
+    currentIdx = (currentIdx + 1) % SHLOKAS.length;
+    renderShloka(currentIdx, true);
+  });
+
+  // Auto-advance every 30 seconds
+  setInterval(() => {
+    currentIdx = (currentIdx + 1) % SHLOKAS.length;
+    renderShloka(currentIdx, true);
+  }, 30000);
+
+  renderShloka(currentIdx, false);
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+// 📊 TRENDING STATS — populate from live data
+// ═══════════════════════════════════════════════════════════════════
+(function initTrendingStats() {
+  // Days since temple establishment (approx 1542 CE Vaishakh Purnima)
+  const foundingDate = new Date(1542, 4, 15); // May 15, 1542 approx
+  const daysSince = Math.floor((Date.now() - foundingDate.getTime()) / 86400000);
+  const el = document.getElementById('tstatDays');
+  if (el) {
+    // Animate count-up
+    let count = 0;
+    const target = daysSince;
+    const step = Math.ceil(target / 60);
+    const timer = setInterval(() => {
+      count = Math.min(count + step, target);
+      el.textContent = count.toLocaleString('en-IN');
+      if (count >= target) clearInterval(timer);
+    }, 30);
+  }
+
+  // Diyas lit today (from diya localStorage)
+  function updateDiyaStat() {
+    try {
+      const diyas = JSON.parse(localStorage.getItem('shree_diya_v1') || '{}');
+      const today = new Date().toDateString();
+      let count = 0;
+      if (diyas._day === today) {
+        count = Object.keys(diyas).filter(k => k !== '_day' && diyas[k]).length;
+      }
+      const d = document.getElementById('tstatDiyas');
+      if (d) d.textContent = count + ' / 27';
+    } catch(_) {}
+  }
+  updateDiyaStat();
+  // Refresh stat every 5s
+  setInterval(updateDiyaStat, 5000);
+
+  // Malas from localStorage
+  function updateMalaStat() {
+    try {
+      const malas = parseInt(localStorage.getItem('shree_malas') || '0');
+      const d = document.getElementById('tstatMalas');
+      if (d) d.textContent = malas.toLocaleString('en-IN');
+    } catch(_) {}
+  }
+  updateMalaStat();
+  setInterval(updateMalaStat, 5000);
+
+  // Prayers count
+  function updatePrayerStat() {
+    try {
+      const prayers = JSON.parse(localStorage.getItem('shree_prayers_v1') || '[]');
+      const d = document.getElementById('tstatPrayers');
+      if (d) d.textContent = (prayers.length || 3).toLocaleString('en-IN') + '+';
+    } catch(_) {}
+  }
+  updatePrayerStat();
+})();
+
 
 
 </script>

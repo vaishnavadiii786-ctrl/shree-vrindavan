@@ -1,105 +1,111 @@
-// ════════════════════════════════════════════════════════════
-// 🛕 SHREE RADHA RAMAN JI — Service Worker
-// Caching strategy: Cache First for assets, Network First for data
-// ════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
+// 🙏 SHREE RADHA RAMAN JI — Service Worker
+//    Offline-first strategy: cache shell on install,
+//    serve from cache + update in background (stale-while-revalidate)
+// ═══════════════════════════════════════════════════════════════════
 
-const SW_VERSION  = 'v1.0.0';
-const CACHE_STATIC  = `shree-static-${SW_VERSION}`;
-const CACHE_IMAGES  = `shree-images-${SW_VERSION}`;
-const CACHE_FONTS   = `shree-fonts-${SW_VERSION}`;
+const CACHE_NAME   = 'shree-rr-v1';
+const OFFLINE_URL  = 'offline.html';
 
-// Files to cache immediately on install
-const PRECACHE_ASSETS = [
+// Static shell assets to pre-cache
+const PRECACHE = [
   '/',
   '/index.html',
   '/manifest.json',
   '/icons/icon-192.png',
-  '/icons/icon-512.png'
+  '/icons/icon-16.png',
+  '/icons/icon-32.png',
 ];
 
-// ── Install: precache static shell ───────────────────────────
+// ── Install: pre-cache shell ─────────────────────────────────────────
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_STATIC).then(cache => {
-      return cache.addAll(PRECACHE_ASSETS);
+    caches.open(CACHE_NAME).then(cache => {
+      // Add what we can; don't fail install if optional assets 404
+      return cache.addAll(PRECACHE).catch(() => cache.add('/index.html'));
     }).then(() => self.skipWaiting())
   );
 });
 
-// ── Activate: clean old caches ────────────────────────────────
+// ── Activate: clean old caches ───────────────────────────────────────
 self.addEventListener('activate', event => {
-  const allowedCaches = [CACHE_STATIC, CACHE_IMAGES, CACHE_FONTS];
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
-        keys.filter(k => !allowedCaches.includes(k)).map(k => caches.delete(k))
+        keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
       )
     ).then(() => self.clients.claim())
   );
 });
 
-// ── Fetch: smart caching strategy ────────────────────────────
+// ── Fetch: stale-while-revalidate for navigation & GET ───────────────
 self.addEventListener('fetch', event => {
   const { request } = event;
-  const url = new URL(request.url);
 
-  // Skip non-GET and cross-origin API requests
+  // Only handle GET requests
   if (request.method !== 'GET') return;
-  if (url.hostname === 'api.jsonbin.io') return;
-  if (url.hostname === 'api.cloudinary.com') return;
-  if (url.hostname === 'www.googletagmanager.com') return;
 
-  // Google Fonts — Cache First
-  if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') {
-    event.respondWith(
-      caches.open(CACHE_FONTS).then(cache =>
-        cache.match(request).then(cached => {
-          if (cached) return cached;
-          return fetch(request).then(response => {
+  // Skip non-http(s) requests (chrome-extension:// etc)
+  if (!request.url.startsWith('http')) return;
+
+  // Skip third-party API calls (Cloudinary, JSONBin, etc)
+  const url = new URL(request.url);
+  const thirdParty = ['api.cloudinary.com','api.jsonbin.io','api.imgbb.com',
+                      'www.googletagmanager.com','fonts.googleapis.com','fonts.gstatic.com'];
+  if (thirdParty.some(h => url.hostname.includes(h))) return;
+
+  event.respondWith(
+    caches.open(CACHE_NAME).then(async cache => {
+      const cached = await cache.match(request);
+
+      const networkFetch = fetch(request)
+        .then(response => {
+          // Cache successful opaque & 200 responses
+          if (response && (response.status === 200 || response.type === 'opaque')) {
             cache.put(request, response.clone());
-            return response;
-          });
+          }
+          return response;
         })
-      )
-    );
-    return;
-  }
+        .catch(() => null);
 
-  // Cloudinary images — Cache First (permanent URLs)
-  if (url.hostname.includes('cloudinary.com') || url.hostname.includes('res.cloudinary.com')) {
-    event.respondWith(
-      caches.open(CACHE_IMAGES).then(cache =>
-        cache.match(request).then(cached => {
-          if (cached) return cached;
-          return fetch(request).then(response => {
-            if (response.ok) cache.put(request, response.clone());
-            return response;
-          }).catch(() => cached || new Response('', { status: 503 }));
-        })
-      )
-    );
-    return;
-  }
+      // Return cached immediately; update in background
+      return cached || networkFetch || caches.match('/index.html');
+    })
+  );
+});
 
-  // HTML / static assets — Cache First with network fallback
-  if (url.origin === self.location.origin) {
-    event.respondWith(
-      caches.open(CACHE_STATIC).then(cache =>
-        cache.match(request).then(cached => {
-          const networkFetch = fetch(request).then(response => {
-            if (response.ok) cache.put(request, response.clone());
-            return response;
-          });
-          // Return cache immediately, update in background (stale-while-revalidate)
-          return cached || networkFetch;
-        })
-      )
-    );
-    return;
+// ── Background Sync: log offline actions when back online ────────────
+self.addEventListener('sync', event => {
+  if (event.tag === 'sync-prayers') {
+    // Could sync prayer wall to a real backend here
+    console.log('🙏 Background sync: prayers');
   }
 });
 
-// ── Background Sync message ────────────────────────────────────
-self.addEventListener('message', event => {
-  if (event.data === 'SKIP_WAITING') self.skipWaiting();
+// ── Push Notifications: aarti reminders ──────────────────────────────
+self.addEventListener('push', event => {
+  const data = event.data?.json() || {
+    title: 'Shree Radha Raman Ji 🪷',
+    body: 'Aarti is starting soon! Radhe Radhe! 🙏',
+    icon: '/icons/icon-192.png',
+    badge: '/icons/icon-32.png',
+    tag: 'aarti-reminder'
+  };
+  event.waitUntil(
+    self.registration.showNotification(data.title, {
+      body: data.body,
+      icon: data.icon || '/icons/icon-192.png',
+      badge: data.badge || '/icons/icon-32.png',
+      tag: data.tag || 'aarti',
+      vibrate: [100, 50, 100],
+      data: { url: data.url || '/' }
+    })
+  );
+});
+
+self.addEventListener('notificationclick', event => {
+  event.notification.close();
+  event.waitUntil(
+    clients.openWindow(event.notification.data?.url || '/')
+  );
 });

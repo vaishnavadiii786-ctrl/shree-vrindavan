@@ -1,4 +1,4 @@
-H<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
@@ -1325,23 +1325,6 @@ img  { max-width: 100%; height: auto; display: block; }
 .notif-times { display:flex; flex-wrap:wrap; justify-content:center; gap:.5rem; margin-top:1.2rem; }
 .notif-time-chip { font-family:'Cormorant Garamond',serif; font-size:.8rem; color:rgba(140,180,255,.65); background:rgba(80,120,200,.12); border:1px solid rgba(100,140,200,.2); border-radius:20px; padding:.2rem .75rem; }
 
-/* ════════ 6. BLESSING CARD MAKER ════════ */
-#card-maker-section { background:linear-gradient(180deg,rgba(3,5,20,0),rgba(10,15,60,.3),rgba(3,5,20,0)); }
-.card-maker-wrap { max-width:780px; margin:0 auto; }
-.card-controls { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.5rem; }
-@media(max-width:600px){ .card-controls{ grid-template-columns:1fr; } }
-.card-ctrl-group { display:flex; flex-direction:column; gap:.4rem; }
-.card-ctrl-label { font-family:'Cormorant Garamond',serif; font-size:.85rem; color:rgba(140,170,255,.6); letter-spacing:.1em; }
-.card-ctrl-input { background:rgba(8,14,55,.6); border:1px solid rgba(100,130,220,.25); border-radius:6px; padding:.65rem 1rem; color:#D0D8FF; font-family:'Cormorant Garamond',serif; font-size:1rem; outline:none; transition:border-color .3s; }
-.card-ctrl-input:focus { border-color:rgba(140,170,255,.55); }
-.card-ctrl-select { background:rgba(8,14,55,.8); border:1px solid rgba(100,130,220,.25); border-radius:6px; padding:.65rem 1rem; color:#D0D8FF; font-family:'Cormorant Garamond',serif; font-size:.95rem; outline:none; cursor:pointer; }
-.card-preview-wrap { position:relative; margin-bottom:1.5rem; border-radius:8px; overflow:hidden; border:1px solid rgba(100,130,220,.2); }
-#blessingCanvas { display:block; width:100%; cursor:pointer; }
-.card-btn-row { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
-.card-btn { display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 2rem; border-radius:30px; cursor:pointer; font-family:'Cinzel Decorative',cursive; font-size:.82rem; letter-spacing:.1em; transition:all .3s; border:1px solid rgba(120,160,255,.4); background:rgba(80,120,255,.12); color:#A8C0FF; }
-.card-btn:hover { background:rgba(80,120,255,.25); transform:scale(1.04); }
-.card-btn.primary { background:linear-gradient(135deg,rgba(80,120,255,.25),rgba(60,100,220,.2)); border-color:rgba(140,170,255,.55); }
-
 /* ════════ 7. QUIZ ════════ */
 #quiz-section { background:linear-gradient(180deg,rgba(3,5,20,0),rgba(8,12,55,.35),rgba(3,5,20,0)); }
 .quiz-wrap { max-width:680px; margin:0 auto; }
@@ -1600,7 +1583,7 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
     <li><a href="#timer-section">Timer</a></li>
     <li><a href="#panchang-section">Panchang</a></li>
     <li><a href="#quiz-section">Quiz</a></li>
-    <li><a href="#prayer-section">Prayers</a></li>
+    <li><a href="#map-section">Map</a></li>
     <li><a href="#youtube-section">YouTube</a></li>
     <li><a href="#instagram-section">Instagram</a></li>
   </ul>
@@ -1794,7 +1777,12 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
     <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(255,248,231,.55);max-width:500px;margin:0 auto;font-size:1.05rem;">Daily darshan, live aarti & bhajans — straight from Vrindavan Dham</p>
   </div>
   <a class="yt-card" href="https://youtube.com/@radharamanjuu_official?si=vJ6QfNy6WGISiKuh" target="_blank" rel="noopener noreferrer">
-    <span class="yt-icon">▶️</span>
+    <span class="yt-icon">
+      <svg width="68" height="48" viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
+        <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#FF0000"/>
+        <path d="M45 24 27 14v20" fill="#fff"/>
+      </svg>
+    </span>
     <span class="yt-channel-name">Radha Raman Juu Official</span>
     <span class="yt-handle">@radharamanjuu_official</span>
     <p class="yt-desc">Experience the divine blessings of Shree Radha Raman Ji every day —<br>live aarti streams, special darshans, kirtan, and bhajans<br>directly from the sacred temple of Vrindavan Dham.</p>
@@ -2020,44 +2008,6 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 <!-- ════════════════════════════════════════════════════════
      💌 5. BLESSING CARD MAKER
 ════════════════════════════════════════════════════════ -->
-<section id="card-maker-section" class="feature-section">
-  <div class="section-header">
-    <span class="section-eyebrow">आशीर्वाद कार्ड</span>
-    <h2 class="section-title">Blessing Card Maker</h2>
-    <div class="section-divider"><div class="divider-lotus">💌</div></div>
-    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(160,190,255,.55);max-width:500px;margin:.5rem auto 0;font-size:1rem;">Create a personalised divine blessing card — share on WhatsApp, Instagram & more</p>
-  </div>
-  <div class="card-maker-wrap">
-    <div class="card-controls">
-      <div class="card-ctrl-group"><label class="card-ctrl-label">Your Name</label><input type="text" class="card-ctrl-input" id="cardName" placeholder="Enter name…" maxlength="30"></div>
-      <div class="card-ctrl-group"><label class="card-ctrl-label">Blessing Message</label><input type="text" class="card-ctrl-input" id="cardMsg" placeholder="Radhe Radhe!" maxlength="60"></div>
-      <div class="card-ctrl-group"><label class="card-ctrl-label">Card Style</label>
-        <select class="card-ctrl-select" id="cardStyle">
-          <option value="midnight">🌌 Midnight Celestial</option>
-          <option value="golden">✨ Divine Golden</option>
-          <option value="lotus">🪷 Sacred Lotus</option>
-          <option value="temple">🏛️ Temple Crimson</option>
-        </select>
-      </div>
-      <div class="card-ctrl-group"><label class="card-ctrl-label">Mantra / Shloka</label>
-        <select class="card-ctrl-select" id="cardMantra">
-          <option>राधे राधे</option>
-          <option>हरे कृष्ण हरे कृष्ण</option>
-          <option>जय श्री राधा रमण</option>
-          <option>ॐ नमो भगवते वासुदेवाय</option>
-          <option>राधे श्याम राधे श्याम</option>
-        </select>
-      </div>
-    </div>
-    <div class="card-preview-wrap"><canvas id="blessingCanvas" width="800" height="450"></canvas></div>
-    <div class="card-btn-row">
-      <button class="card-btn primary" id="cardDownloadBtn">⬇ Download Card</button>
-      <button class="card-btn" id="cardShareBtn">↗ Share Card</button>
-      <button class="card-btn" id="cardRefreshBtn">↻ Refresh</button>
-    </div>
-  </div>
-</section>
-
 <!-- ════════════════════════════════════════════════════════
      🎯 6. VRINDAVAN QUIZ
 ════════════════════════════════════════════════════════ -->
@@ -2085,99 +2035,57 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════════
-     📖 7. BHAJAN LYRICS
-════════════════════════════════════════════════════════ -->
-<section id="lyrics-section" class="feature-section">
-  <div class="section-header">
-    <span class="section-eyebrow">भजन संग्रह</span>
-    <h2 class="section-title">Bhajan Lyrics</h2>
-    <div class="section-divider"><div class="divider-lotus">📖</div></div>
-  </div>
-  <div class="lyrics-search-wrap"><input type="text" class="lyrics-search" id="lyricsSearch" placeholder="🔍  Search bhajans… (e.g. Radhe, Hare Krishna)"></div>
-  <div class="lyrics-tabs" id="lyricsTabs"></div>
-  <div id="lyricsCard"></div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════
-     🗺️ 8. VRINDAVAN MAP
-════════════════════════════════════════════════════════ -->
 <section id="map-section" class="feature-section">
   <div class="section-header">
     <span class="section-eyebrow">वृंदावन धाम</span>
     <h2 class="section-title">Vrindavan Dham Map</h2>
     <div class="section-divider"><div class="divider-lotus">🗺️</div></div>
-    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(160,190,255,.55);max-width:500px;margin:.5rem auto 0;font-size:1rem;">The 7 sacred temples — tap a temple to learn more</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(160,190,255,.55);max-width:500px;margin:.5rem auto 0;font-size:1rem;">Shree Radha Raman Ji Mandir — Seva Kunj, Vrindavan</p>
   </div>
   <div class="vrindavan-map-wrap">
-    <div class="vmap-svg-wrap" id="vmapWrap"></div>
-    <div class="map-temple-info" id="mapTempleInfo">
-      <span class="map-temple-name" id="mapTempleName"></span>
-      <p class="map-temple-desc" id="mapTempleDesc"></p>
+    <div style="max-width:820px;margin:0 auto;border-radius:16px;overflow:hidden;border:1px solid rgba(100,130,220,.25);box-shadow:0 0 60px rgba(80,100,255,.12);">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3537.6!2d77.6963!3d27.5794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39736d5a5b5b5b5b%3A0x1234567890abcdef!2sRadha%20Raman%20Temple%2C%20Vrindavan!5e0!3m2!1sen!2sin!4v1234567890"
+        width="100%"
+        height="450"
+        style="border:0;display:block;filter:invert(90%) hue-rotate(180deg) saturate(0.8) brightness(0.85);"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Shree Radha Raman Ji Mandir, Vrindavan">
+      </iframe>
     </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════
-     📸 9. PHOTO FRAME
-════════════════════════════════════════════════════════ -->
-<section id="frame-section" class="feature-section">
-  <div class="section-header">
-    <span class="section-eyebrow">दिव्य फोटो फ्रेम</span>
-    <h2 class="section-title">Divine Photo Frame</h2>
-    <div class="section-divider"><div class="divider-lotus">📸</div></div>
-    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(160,190,255,.55);max-width:500px;margin:.5rem auto 0;font-size:1rem;">Add a sacred frame to any photo — perfect for sharing darshan</p>
-  </div>
-  <div class="frame-wrap">
-    <div class="frame-selector" id="framePicker"></div>
-    <div class="frame-upload-row">
-      <label class="frame-upload-btn">📁 &nbsp; Upload Your Photo<input type="file" id="frameFileInput" accept="image/*"></label>
-      <button class="card-btn" id="frameClearBtn">✕ Clear</button>
+    <!-- Temple Info Cards -->
+    <div style="max-width:820px;margin:1.5rem auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;">
+      <div style="background:linear-gradient(145deg,rgba(8,12,55,.6),rgba(5,8,35,.8));border:1px solid rgba(100,130,220,.2);border-radius:10px;padding:1.2rem;text-align:center;">
+        <span style="font-size:1.8rem;display:block;margin-bottom:.4rem;">📍</span>
+        <span style="font-family:'Cinzel Decorative',cursive;font-size:.85rem;color:#A8C0FF;display:block;margin-bottom:.3rem;">Address</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(200,215,255,.8);">Radha Raman Gali, Seva Kunj, Vrindavan — 281121</span>
+      </div>
+      <div style="background:linear-gradient(145deg,rgba(8,12,55,.6),rgba(5,8,35,.8));border:1px solid rgba(100,130,220,.2);border-radius:10px;padding:1.2rem;text-align:center;">
+        <span style="font-size:1.8rem;display:block;margin-bottom:.4rem;">🕌</span>
+        <span style="font-family:'Cinzel Decorative',cursive;font-size:.85rem;color:#A8C0FF;display:block;margin-bottom:.3rem;">Established</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(200,215,255,.8);">1542 CE · Vaishakh Purnima · By Gopal Bhatt Goswami</span>
+      </div>
+      <div style="background:linear-gradient(145deg,rgba(8,12,55,.6),rgba(5,8,35,.8));border:1px solid rgba(100,130,220,.2);border-radius:10px;padding:1.2rem;text-align:center;">
+        <span style="font-size:1.8rem;display:block;margin-bottom:.4rem;">🚗</span>
+        <span style="font-family:'Cinzel Decorative',cursive;font-size:.85rem;color:#A8C0FF;display:block;margin-bottom:.3rem;">How to Reach</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(200,215,255,.8);">Mathura Railway Station se 12 km · Yamuna Expressway</span>
+      </div>
+      <div style="background:linear-gradient(145deg,rgba(8,12,55,.6),rgba(5,8,35,.8));border:1px solid rgba(100,130,220,.2);border-radius:10px;padding:1.2rem;text-align:center;">
+        <span style="font-size:1.8rem;display:block;margin-bottom:.4rem;">🧭</span>
+        <span style="font-family:'Cinzel Decorative',cursive;font-size:.85rem;color:#A8C0FF;display:block;margin-bottom:.3rem;">GPS Coordinates</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:.95rem;color:rgba(200,215,255,.8);">27.5794° N, 77.6963° E</span>
+      </div>
     </div>
-    <canvas id="frameCanvas" width="800" height="800"></canvas>
-    <div class="frame-btn-row">
-      <button class="card-btn primary" id="frameDownloadBtn">⬇ Download Framed Photo</button>
-      <button class="card-btn" id="frameShareBtn">↗ Share</button>
+    <div style="text-align:center;margin-top:1.5rem;">
+      <a href="https://maps.google.com/?q=Radha+Raman+Temple+Vrindavan" target="_blank" rel="noopener"
+         style="display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 2.2rem;background:linear-gradient(135deg,rgba(80,120,255,.2),rgba(60,100,220,.15));border:1px solid rgba(120,160,255,.4);border-radius:30px;color:#A8C0FF;font-family:'Cinzel Decorative',cursive;font-size:.85rem;letter-spacing:.1em;text-decoration:none;transition:all .3s;"
+         onmouseover="this.style.background='linear-gradient(135deg,rgba(80,120,255,.35),rgba(60,100,220,.28))';this.style.transform='translateY(-2px)'"
+         onmouseout="this.style.background='linear-gradient(135deg,rgba(80,120,255,.2),rgba(60,100,220,.15))';this.style.transform='translateY(0)'">
+        🗺️ &nbsp; Open in Google Maps
+      </a>
     </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════
-     🙏 10. PRAYER WALL
-════════════════════════════════════════════════════════ -->
-<section id="prayer-section" class="feature-section">
-  <div class="section-header">
-    <span class="section-eyebrow">मनोकामना दीवार</span>
-    <h2 class="section-title">Prayer Wall</h2>
-    <div class="section-divider"><div class="divider-lotus">🙏</div></div>
-    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(160,190,255,.55);max-width:500px;margin:.5rem auto 0;font-size:1rem;">Share your manokamna — Radha Raman Ji hears every wish 🪷</p>
-  </div>
-  <div class="prayer-input-wrap">
-    <div class="prayer-name-row">
-      <input type="text" class="prayer-input" id="prayerName" placeholder="Your name (नाम)…" maxlength="30">
-      <input type="text" class="prayer-input" id="prayerCity" placeholder="City / गाँव…" maxlength="25">
-    </div>
-    <textarea class="prayer-textarea" id="prayerText" placeholder="अपनी मनोकामना लिखें… Write your wish / prayer here…" maxlength="220"></textarea>
-    <button class="prayer-submit-btn" id="prayerSubmitBtn">🙏 &nbsp; Submit Prayer</button>
-  </div>
-  <div class="prayer-wall-grid" id="prayerGrid"></div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════
-     🕯️ 11. VIRTUAL DIYA
-════════════════════════════════════════════════════════ -->
-<section id="diya-section" class="feature-section">
-  <div class="section-header">
-    <span class="section-eyebrow">आरती दीपक</span>
-    <h2 class="section-title">Light a Virtual Diya</h2>
-    <div class="section-divider"><div class="divider-lotus">🕯️</div></div>
-    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(160,190,255,.55);max-width:500px;margin:.5rem auto 0;font-size:1rem;">Click any diya to light it — offer your devotion to Radha Raman Ji</p>
-  </div>
-  <div class="diya-wrap">
-    <div class="diya-count-display" id="diyaCount">0 🕯️</div>
-    <span class="diya-count-sub" id="diyaSub">Be the first to light a diya today</span>
-    <div class="diya-grid" id="diyaGrid"></div>
-    <button class="light-all-btn" id="lightAllBtn">🕯️ &nbsp; Light All Diyas — Jai Radhe!</button>
   </div>
 </section>
 

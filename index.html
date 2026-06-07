@@ -153,9 +153,7 @@
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vaishnavadiii786-ctrl.github.io/shree-vrindavan/" },
-        { "@type": "ListItem", "position": 2, "name": "Darshan", "item": "https://vaishnavadiii786-ctrl.github.io/shree-vrindavan/#darshan" },
-        { "@type": "ListItem", "position": 3, "name": "Aarti Timings", "item": "https://vaishnavadiii786-ctrl.github.io/shree-vrindavan/#timings" },
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vaishnavadiii786-ctrl.github.io/shree-vrindavan/" },        { "@type": "ListItem", "position": 3, "name": "Aarti Timings", "item": "https://vaishnavadiii786-ctrl.github.io/shree-vrindavan/#timings" },
         { "@type": "ListItem", "position": 4, "name": "Japa Mala", "item": "https://vaishnavadiii786-ctrl.github.io/shree-vrindavan/#mala-section" }
       ]
     },
@@ -569,97 +567,10 @@ section{position:relative;z-index:2;}
 .timing-hindi{font-family:'Noto Serif Devanagari',serif;font-size:.9rem;color:#9090C8;display:block;margin-bottom:.5rem;}
 .timing-time{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--cream);font-weight:600;}
 
-/* DARSHAN GALLERY */
-#darshan{padding:5rem 2rem;}
-.darshan-tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:1rem;margin-bottom:3rem;}
-.tab-btn{font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:.12em;padding:.75rem 1.8rem;background:transparent;border:1px solid rgba(100,130,200,.28);color:rgba(180,200,240,.65);cursor:pointer;border-radius:1px;transition:all .4s cubic-bezier(.23,1,.32,1);position:relative;overflow:hidden;}
-.tab-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,215,0,.1),rgba(255,140,0,.1));opacity:0;transition:opacity .3s;}
-.tab-btn:hover::before,.tab-btn.active::before{opacity:1;}
-.tab-btn.active{border-color:rgba(140,170,255,.75);color:#A8C0FF;box-shadow:0 0 18px rgba(100,140,255,.18);}
-.tab-btn:hover{border-color:rgba(255,215,0,.6);color:rgba(255,248,231,.9);}
-
-/* Upload Zone — hidden from public, shown in admin mode */
-.upload-zone{display:none;max-width:700px;margin:0 auto 3rem;border:2px dashed rgba(100,140,220,.35);border-radius:8px;padding:2.5rem;text-align:center;cursor:pointer;transition:all .3s;background:rgba(255,215,0,.02);position:relative;}
-body.admin-mode .upload-zone{display:block;}
-body.admin-mode #adminSyncPanel{display:block!important;}
-.upload-zone:hover,.upload-zone.dragover{border-color:rgba(120,160,255,.7);background:rgba(80,120,255,.05);box-shadow:inset 0 0 30px rgba(80,120,255,.04);}
-.upload-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.upload-icon{font-size:3rem;display:block;margin-bottom:1rem;}
-.upload-text{font-family:'Cinzel Decorative',cursive;font-size:1rem;color:#A0B8FF;margin-bottom:.5rem;display:block;}
-.upload-sub{font-family:'Cormorant Garamond',serif;color:rgba(255,248,231,.55);font-size:.9rem;}
-
-.gallery-panel{display:none;}
-.gallery-panel.active{display:block;}
-.gallery-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.8rem;}
-
-/* GALLERY CARD */
-.gallery-card-wrap{display:flex;flex-direction:column;border-radius:3px;overflow:hidden;border:1px solid rgba(100,120,200,.18);background:linear-gradient(160deg,rgba(8,12,50,.55),rgba(4,6,28,.8));transition:transform .5s cubic-bezier(.23,1,.32,1),box-shadow .5s,border-color .4s;}
-.gallery-card-wrap:hover{transform:translateY(-10px) scale(1.015);box-shadow:0 25px 70px rgba(80,100,255,.2),0 0 0 1px rgba(140,160,255,.28);border-color:rgba(140,160,255,.42);}
-.gallery-card{position:relative;aspect-ratio:3/4;cursor:pointer;overflow:hidden;}
-.gallery-card img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block;}
-.gallery-card-wrap:hover .gallery-card img{transform:scale(1.07);}
-.card-insta-badge{position:absolute;top:.7rem;left:.7rem;background:linear-gradient(135deg,rgba(131,58,180,.85),rgba(253,29,29,.85),rgba(252,176,69,.85));color:#fff;font-family:'Cormorant Garamond',serif;font-size:.75rem;font-weight:600;padding:.28rem .65rem;border-radius:20px;display:flex;align-items:center;gap:.3rem;z-index:3;text-decoration:none;transition:transform .2s,filter .2s;white-space:nowrap;}
-.card-insta-badge:hover{transform:scale(1.05);filter:brightness(1.15);}
-.card-date-badge{position:absolute;bottom:.75rem;left:.75rem;z-index:3;pointer-events:none;}
-.card-day{font-family:'Noto Serif Devanagari',serif;font-size:.78rem;color:#A0B8FF;display:block;text-shadow:0 1px 6px rgba(0,0,0,.8);letter-spacing:.05em;}
-.card-date-en{font-family:'Cormorant Garamond',serif;font-size:.82rem;color:rgba(255,248,231,.85);display:block;text-shadow:0 1px 6px rgba(0,0,0,.8);font-weight:600;}
-.gallery-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(40,0,0,.97) 0%,rgba(61,0,0,.55) 45%,transparent 72%);display:flex;flex-direction:column;justify-content:flex-end;padding:1.2rem;opacity:0;transition:opacity .3s;z-index:4;}
-.gallery-card:hover .gallery-card-overlay{opacity:1;}
-.card-title{font-family:'Cinzel Decorative',cursive;font-size:.85rem;color:var(--gold);margin-bottom:.25rem;}
-.card-date-overlay{font-family:'Noto Serif Devanagari',serif;font-size:.8rem;color:rgba(180,200,255,.85);margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem;}
-.card-actions{display:flex;gap:.5rem;flex-wrap:wrap;}
-.action-btn{flex:1;min-width:60px;padding:.42rem .6rem;border:1px solid rgba(100,130,220,.4);background:rgba(80,110,200,.08);color:#A0B8FF;cursor:pointer;border-radius:2px;font-family:'Cormorant Garamond',serif;font-size:.8rem;letter-spacing:.06em;transition:all .3s cubic-bezier(.23,1,.32,1);display:flex;align-items:center;justify-content:center;gap:.25rem;}
-.action-btn:hover{background:rgba(100,130,255,.18);border-color:rgba(160,180,255,.65);color:#E8ECFF;box-shadow:0 0 14px rgba(100,130,255,.2);}
-.action-btn.share-btn{border-color:rgba(255,79,123,.5);color:var(--rose);background:rgba(255,79,123,.1);}
-.action-btn.share-btn:hover{background:rgba(255,79,123,.25);}
-.action-btn.delete-btn{display:none;border-color:rgba(255,80,80,.5);color:#FF7777;background:rgba(255,80,80,.1);}
-.action-btn.delete-btn:hover{background:rgba(255,80,80,.3);}
-body.admin-mode .action-btn.delete-btn{display:flex;}
-
-/* REACTIONS */
-.card-reactions{display:flex;align-items:center;gap:.35rem;padding:.6rem .9rem;background:linear-gradient(90deg,rgba(5,8,35,.85),rgba(3,5,25,.9));border-top:1px solid rgba(80,100,200,.15);flex-wrap:wrap;}
-.reaction-btn{display:flex;align-items:center;gap:.25rem;padding:.3rem .6rem;border-radius:20px;border:1px solid rgba(255,215,0,.15);background:rgba(255,215,0,.05);cursor:pointer;font-size:.85rem;color:rgba(255,248,231,.7);font-family:'Cormorant Garamond',serif;transition:all .2s;white-space:nowrap;user-select:none;}
-.reaction-btn:hover{border-color:rgba(255,215,0,.4);background:rgba(255,215,0,.12);transform:scale(1.08);}
-.reaction-btn.reacted{border-color:rgba(255,215,0,.6);background:rgba(255,215,0,.18);color:var(--gold);font-weight:600;}
-.react-emoji{font-size:1rem;line-height:1;}
-.react-count{font-size:.78rem;min-width:12px;}
-
-/* EMPTY / LOADING */
-.empty-gallery{grid-column:1/-1;text-align:center;padding:4rem 2rem;}
-.empty-gallery-icon{font-size:4rem;display:block;margin-bottom:1rem;opacity:.4;}
-.empty-gallery p{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(255,248,231,.4);font-size:1.1rem;}
-.gallery-loading{grid-column:1/-1;text-align:center;padding:4rem 2rem;}
-.gallery-spinner{width:48px;height:48px;border:3px solid rgba(80,120,255,.15);border-top-color:#A0B8FF;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 1.2rem;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.gallery-loading p{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(160,190,255,.4);font-size:1rem;}
-
-/* UPLOAD TYPE SELECTOR MODAL */
-.upload-type-modal{position:fixed;inset:0;background:rgba(4,6,28,.97);z-index:3000;display:none;align-items:center;justify-content:center;}
-.upload-type-modal.open{display:flex;}
-.upload-type-box{background:linear-gradient(160deg,rgba(8,12,55,.97),rgba(4,6,30,.99));border:1px solid rgba(120,150,255,.35);border-radius:14px;padding:2.5rem 2rem;max-width:440px;width:92%;text-align:center;position:relative;box-shadow:0 20px 60px rgba(0,0,30,.8);}
-.upload-type-title{font-family:'Cinzel Decorative',cursive;color:#C0D0FF;font-size:1.1rem;letter-spacing:.12em;display:block;margin-bottom:.4rem;}
-.upload-type-sub{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(180,200,255,.5);font-size:.95rem;display:block;margin-bottom:1.8rem;}
-.upload-type-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:1.8rem;}
-.upload-type-btn{display:flex;flex-direction:column;align-items:center;gap:.5rem;padding:1.2rem .8rem;border:2px solid rgba(100,130,220,.25);border-radius:10px;background:rgba(8,14,55,.6);cursor:pointer;transition:all .3s;color:#B0C8FF;font-family:'Cormorant Garamond',serif;font-size:.95rem;letter-spacing:.06em;}
-.upload-type-btn:hover{border-color:rgba(140,180,255,.7);background:rgba(15,22,80,.8);transform:translateY(-3px);box-shadow:0 8px 24px rgba(80,120,255,.2);}
-.upload-type-btn.selected{border-color:#A0B8FF;background:rgba(80,120,255,.18);color:#E0ECFF;}
-.upload-type-btn span:first-child{font-size:2rem;}
-.upload-type-confirm{width:100%;padding:.9rem;background:linear-gradient(135deg,rgba(80,120,255,.25),rgba(100,150,255,.18));border:1px solid rgba(140,170,255,.5);color:#C0D4FF;font-family:'Cinzel Decorative',cursive;font-size:.88rem;letter-spacing:.12em;border-radius:8px;cursor:pointer;transition:all .3s;}
-.upload-type-confirm:hover{background:linear-gradient(135deg,rgba(80,120,255,.4),rgba(100,150,255,.3));}
-.upload-type-confirm:disabled{opacity:.35;cursor:not-allowed;}
-.upload-type-cancel{background:none;border:none;color:rgba(180,200,255,.35);font-family:'Cormorant Garamond',serif;font-size:.88rem;cursor:pointer;margin-top:.8rem;display:block;width:100%;transition:color .2s;}
-.upload-type-cancel:hover{color:rgba(180,200,255,.7);}
-/* Expiry badge on gallery cards */
-.card-expiry-badge{position:absolute;top:.5rem;left:.5rem;background:rgba(4,6,28,.85);border:1px solid rgba(100,140,255,.3);border-radius:20px;padding:.18rem .65rem;font-family:'Cormorant Garamond',serif;font-size:.72rem;color:rgba(160,190,255,.7);letter-spacing:.05em;pointer-events:none;}
 .card-expiry-badge.expires-today{border-color:rgba(255,160,60,.5);color:rgba(255,180,80,.85);}
 
 /* UPLOAD PROGRESS */
-.upload-progress{display:none;max-width:700px;margin:-2rem auto 2rem;background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.2);border-radius:6px;padding:1rem 1.5rem;}
-body.admin-mode .upload-progress{display:block;}
-.upload-progress-bar-wrap{height:6px;background:rgba(255,215,0,.1);border-radius:3px;overflow:hidden;margin-top:.5rem;}
-.upload-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--saffron),var(--gold));border-radius:3px;transition:width .3s;}
-.upload-progress-label{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:rgba(255,248,231,.6);}
-
+body.admin-mode 
 /* YOUTUBE */
 #youtube-section{padding:5rem 2rem;background:linear-gradient(180deg,rgba(3,5,20,0) 0%,rgba(180,0,0,.1) 50%,rgba(3,5,20,0) 100%);}
 .yt-card{max-width:680px;margin:0 auto;border:1px solid rgba(255,70,70,.35);border-radius:12px;padding:3rem 2.5rem;text-align:center;background:linear-gradient(145deg,rgba(180,0,0,.12),rgba(61,0,0,.2));position:relative;overflow:hidden;cursor:pointer;text-decoration:none;display:block;transition:transform .3s,box-shadow .3s,border-color .3s;}
@@ -699,20 +610,6 @@ body.admin-mode .upload-progress{display:block;}
 .insta-tag{font-family:'Cormorant Garamond',serif;font-size:.8rem;color:rgba(200,120,255,.7);background:rgba(131,58,180,.08);border:1px solid rgba(131,58,180,.2);border-radius:20px;padding:.2rem .7rem;letter-spacing:.05em;}
 
 /* LIGHTBOX */
-.lightbox{position:fixed;inset:0;background:rgba(3,1,0,.97);z-index:1000;display:none;align-items:center;justify-content:center;flex-direction:column;padding:2rem;}
-.lightbox.open{display:flex;}
-.lightbox-img{max-width:90vw;max-height:75vh;object-fit:contain;border:1px solid rgba(255,215,0,.3);border-radius:4px;box-shadow:0 0 80px rgba(255,215,0,.1);}
-.lightbox-info{margin-top:1.5rem;text-align:center;}
-.lightbox-title{font-family:'Cinzel Decorative',cursive;color:var(--gold);font-size:1.1rem;margin-bottom:1rem;}
-.lightbox-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
-.lightbox-btn{padding:.7rem 2rem;border:1px solid rgba(255,215,0,.4);background:rgba(255,215,0,.08);color:var(--gold);cursor:pointer;border-radius:3px;font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:.1em;transition:all .2s;display:flex;align-items:center;gap:.5rem;}
-.lightbox-btn:hover{background:rgba(255,215,0,.2);}
-.lightbox-btn.lb-share{border-color:rgba(255,79,123,.4);color:var(--rose);background:rgba(255,79,123,.08);}
-.lightbox-btn.lb-share:hover{background:rgba(255,79,123,.2);}
-.lightbox-close{position:absolute;top:1.5rem;right:2rem;background:none;border:none;color:rgba(255,248,231,.6);font-size:2rem;cursor:pointer;transition:color .2s;line-height:1;}
-.lightbox-close:hover{color:var(--gold);}
-.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);color:var(--gold);font-size:1.5rem;width:48px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%;transition:all .2s;}
-.lb-nav:hover{background:rgba(255,215,0,.25);}
 .lb-prev{left:1rem;}
 .lb-next{right:1rem;}
 
@@ -778,7 +675,7 @@ footer{padding:4rem 2rem 2rem;text-align:center;background:linear-gradient(to to
 /* ═══════════════════════════════════════════════
    DAILY SHLOKA ROTATOR
 ═══════════════════════════════════════════════ */
-#shloka-section{padding:4rem 2rem;position:relative;z-index:2;overflow:hidden;}
+#shloka-section{padding:4rem 2rem;position:relative;z-index:2;overflow:hidden;contain:layout style;}
 #shloka-section::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,5,20,0),rgba(30,10,60,.25),rgba(3,5,20,0));pointer-events:none;}
 .shloka-card{max-width:720px;margin:0 auto;text-align:center;position:relative;border:1px solid rgba(180,140,255,.2);border-radius:20px;padding:3rem 2.5rem 2rem;background:linear-gradient(145deg,rgba(20,10,50,.55),rgba(8,4,30,.7));backdrop-filter:blur(12px);box-shadow:0 0 60px rgba(120,60,255,.08),0 0 0 1px rgba(120,80,255,.06);}
 .shloka-card::before{content:'✦ आज का श्लोक ✦';position:absolute;top:-0.85rem;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#2A0060,#0C0025);border:1px solid rgba(180,140,255,.3);color:rgba(200,170,255,.8);font-family:'Cormorant Garamond',serif;font-size:.78rem;letter-spacing:.22em;padding:.25rem 1.2rem;border-radius:20px;white-space:nowrap;}
@@ -798,7 +695,7 @@ footer{padding:4rem 2rem 2rem;text-align:center;background:linear-gradient(to to
 /* ═══════════════════════════════════════════════
    TRENDING LANDING STRIP — Stats & Social Proof
 ═══════════════════════════════════════════════ */
-#trending-strip{padding:2.5rem 2rem;position:relative;z-index:2;background:linear-gradient(180deg,rgba(3,5,20,0),rgba(10,4,30,.4),rgba(3,5,20,0));}
+#trending-strip{padding:2.5rem 2rem;position:relative;z-index:2;background:linear-gradient(180deg,rgba(3,5,20,0),rgba(10,4,30,.4),rgba(3,5,20,0));contain:layout style;}
 .trending-inner{max-width:1000px;margin:0 auto;}
 .trending-heading{text-align:center;font-family:'Cinzel Decorative',cursive;font-size:clamp(.65rem,1.8vw,.85rem);color:rgba(180,160,255,.5);letter-spacing:.3em;margin-bottom:2rem;}
 .trending-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem;}
@@ -929,7 +826,6 @@ footer{padding:4rem 2rem 2rem;text-align:center;background:linear-gradient(to to
   60%{opacity:.85;transform:translateY(-4px) scale(1.005);}
   100%{opacity:1;transform:translateY(0) scale(1);}
 }
-.gallery-card-wrap{animation:royalEntrance .7s cubic-bezier(.23,1,.32,1) both;}
 
 /* Royal shimmer sweep on timing cards */
 @keyframes royalShimmer{
@@ -967,65 +863,6 @@ footer{padding:4rem 2rem 2rem;text-align:center;background:linear-gradient(to to
   box-shadow:0 0 10px rgba(100,140,255,.18);
 }
 
-/* Royal lightbox buttons */
-.lightbox-btn{
-  padding:.7rem 2rem;border:1px solid rgba(100,140,220,.38);
-  background:rgba(80,120,220,.08);color:#A0B8FF;cursor:pointer;
-  border-radius:2px;font-family:'Cormorant Garamond',serif;
-  font-size:1rem;letter-spacing:.12em;transition:all .35s cubic-bezier(.23,1,.32,1);
-  display:flex;align-items:center;gap:.5rem;
-}
-.lightbox-btn:hover{background:rgba(100,140,255,.18);box-shadow:0 0 20px rgba(80,120,255,.2);}
-
-/* Royal nav logo */
-.nav-logo{
-  font-family:'Cinzel Decorative',cursive;font-size:1.5rem;font-weight:900;
-  background:linear-gradient(135deg,#FFFFFF,#C8D0FF,#8090E0,#C0C8FF);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  letter-spacing:.25em;text-shadow:none;
-  filter:drop-shadow(0 0 8px rgba(120,140,255,.4));
-}
-
-/* Royal OM symbol */
-.om-symbol{
-  font-size:clamp(3rem,8vw,6rem);color:#C8D0FF;
-  text-shadow:0 0 25px rgba(180,200,255,.8),0 0 55px rgba(120,150,255,.5),0 0 90px rgba(80,100,255,.35);
-  animation:omPulse 4s ease-in-out infinite;display:block;margin-bottom:.5rem;
-  font-family:'Noto Serif Devanagari',serif;
-}
-
-/* Royal footer mantra */
-.footer-mantra{
-  font-family:'Noto Serif Devanagari',serif;
-  color:rgba(140,170,255,.45);font-size:1rem;margin-top:.75rem;
-  letter-spacing:.15em;text-shadow:0 0 12px rgba(100,140,255,.2);
-}
-
-/* Majestic mala counter */
-.mala-counter-display{
-  font-family:'Cinzel Decorative',cursive;font-size:2.8rem;
-  color:#C0D0FF;text-shadow:0 0 25px rgba(140,180,255,.6),0 0 50px rgba(100,140,255,.35);
-  margin-bottom:.3rem;line-height:1;animation:counterGlow 3s ease-in-out infinite;
-}
-
-/* Royal ashirwad shloka */
-.ashirwad-shloka{
-  font-family:'Noto Serif Devanagari',serif;font-size:1.15rem;
-  color:#A8C0FF;text-align:center;line-height:1.9;margin-bottom:1rem;
-  letter-spacing:.05em;text-shadow:0 0 15px rgba(100,140,255,.35);
-}
-
-/* Royal gallery overlay */
-.gallery-card-overlay{
-  background:linear-gradient(to top,rgba(2,5,30,.97) 0%,rgba(5,10,45,.6) 45%,transparent 72%);
-}
-
-/* Royal card title */
-.card-title{
-  font-family:'Cinzel Decorative',cursive;font-size:.85rem;
-  color:#A0B8FF;margin-bottom:.25rem;
-  text-shadow:0 0 10px rgba(100,130,255,.35);
-}
 /* ═══════════ END ROYAL ═══════════ */
 
 /* ═══════════════════════════════════════════════════════════
@@ -1047,8 +884,7 @@ img  { max-width: 100%; height: auto; display: block; }
 /* ── LARGE LAPTOP (≤1200px) ── */
 @media (max-width: 1200px) {
   .about-grid      { gap: 3rem; }
-  .gallery-grid    { grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); }
-  .timings-grid    { grid-template-columns: repeat(3,1fr); }
+    .timings-grid    { grid-template-columns: repeat(3,1fr); }
 }
 
 /* ── SMALL LAPTOP / LARGE TABLET (≤992px) ── */
@@ -1060,8 +896,7 @@ img  { max-width: 100%; height: auto; display: block; }
   .about-grid      { grid-template-columns: 1fr; gap: 2.5rem; }
   .about-ornament  { display: none; }
   .timings-grid    { grid-template-columns: repeat(3,1fr); gap: 1.2rem; }
-  .gallery-grid    { grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 1.2rem; }
-  .yt-card, .insta-card, .ashirwad-card { padding: 2.5rem 2rem; }
+    .yt-card, .insta-card, .ashirwad-card { padding: 2.5rem 2rem; }
   .share-platforms { grid-template-columns: repeat(3,1fr); }
   .temple-card     { width: 280px; height: 360px; }
 }
@@ -1084,9 +919,7 @@ img  { max-width: 100%; height: auto; display: block; }
   /* Sections */
   .section-header  { padding-top: 3.5rem; margin-bottom: 2.5rem; }
   .section-title   { font-size: clamp(1.6rem,5.5vw,2.8rem); }
-  #about, #timings, #darshan, #mala-section, #ashirwad-section,
-  #youtube-section, #instagram-section { padding: 3.5rem 1.5rem; }
-
+  #about, #timings, 
   /* Timings */
   .timings-grid    { grid-template-columns: repeat(2,1fr); gap: 1rem; }
   .timing-card     { padding: 1.4rem 1rem; }
@@ -1095,11 +928,7 @@ img  { max-width: 100%; height: auto; display: block; }
   .timing-time     { font-size: 1.1rem; }
 
   /* Gallery */
-  .darshan-tabs    { gap: .6rem; }
-  .tab-btn         { padding: .55rem 1.1rem; font-size: .88rem; }
-  .gallery-grid    { grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 1rem; }
-  .upload-zone     { padding: 1.8rem 1.2rem; margin-bottom: 2rem; }
-
+        
   /* Cards */
   .card-reactions  { padding: .5rem .7rem; gap: .25rem; }
   .reaction-btn    { padding: .25rem .45rem; font-size: .8rem; }
@@ -1131,8 +960,7 @@ img  { max-width: 100%; height: auto; display: block; }
   /* Lightbox */
   .lb-prev         { left: .4rem; }
   .lb-next         { right: .4rem; }
-  .lightbox-actions{ flex-direction: column; align-items: center; gap: .6rem; }
-
+  
   /* Admin */
   .admin-box       { padding: 2rem 1.5rem; }
   .admin-fab       { bottom: 1.2rem; right: 1.2rem; width: 46px; height: 46px; font-size: 1.2rem; }
@@ -1167,9 +995,7 @@ img  { max-width: 100%; height: auto; display: block; }
   .timing-card     { padding: 1.1rem .8rem; }
 
   /* Gallery */
-  .gallery-grid    { grid-template-columns: 1fr 1fr; gap: .8rem; }
-  .tab-btn         { padding: .5rem .9rem; font-size: .82rem; letter-spacing: .04em; }
-
+    
   /* Mala canvas */
   #malaCanvas      { width: 280px !important; height: 280px !important; max-width: 88vw; }
   .mala-btn-row    { flex-direction: column; align-items: center; }
@@ -1194,16 +1020,12 @@ img  { max-width: 100%; height: auto; display: block; }
   .hero-subtitle   { font-size: .9rem; letter-spacing: .1em; }
 
   /* Sections */
-  #about, #timings, #darshan, #mala-section, #ashirwad-section,
-  #youtube-section, #instagram-section { padding: 3rem 1rem; }
-  .section-header  { padding-top: 3rem; margin-bottom: 2rem; }
+  #about, #timings,   .section-header  { padding-top: 3rem; margin-bottom: 2rem; }
   .section-title   { font-size: clamp(1.4rem,6vw,2.2rem); letter-spacing: .02em; }
   .section-eyebrow { font-size: .9rem; letter-spacing: .2em; }
 
   /* Gallery single column on small phones */
-  .gallery-grid    { grid-template-columns: 1fr; gap: .8rem; }
-  .gallery-card    { aspect-ratio: 4/5; }
-
+    
   /* Timings 2 col */
   .timings-grid    { grid-template-columns: 1fr 1fr; gap: .7rem; }
 
@@ -1222,10 +1044,7 @@ img  { max-width: 100%; height: auto; display: block; }
   .action-btn      { font-size: .75rem; padding: .38rem .45rem; }
 
   /* Lightbox */
-  .lightbox        { padding: 1rem; }
-  .lightbox-img    { max-height: 65vh; }
-  .lightbox-title  { font-size: .9rem; }
-  .lb-prev, .lb-next { width: 38px; height: 38px; font-size: 1.2rem; }
+        .lb-prev, .lb-next { width: 38px; height: 38px; font-size: 1.2rem; }
 
   /* Ashirwad */
   .ashirwad-shloka       { font-size: 1rem; }
@@ -1257,9 +1076,7 @@ img  { max-width: 100%; height: auto; display: block; }
   .timing-name     { font-size: .72rem; letter-spacing: .04em; }
   .timing-time     { font-size: 1rem; }
 
-  .darshan-tabs    { gap: .4rem; }
-  .tab-btn         { padding: .45rem .7rem; font-size: .78rem; }
-
+    
   #malaCanvas      { max-width: 82vw; }
   .mala-counter-display { font-size: 1.8rem; }
   .mala-btn        { font-size: .85rem; padding: .6rem 1rem; }
@@ -1274,24 +1091,17 @@ img  { max-width: 100%; height: auto; display: block; }
   .aura-dot        { width: 8px; height: 8px; }
 
   .share-platforms { grid-template-columns: repeat(2,1fr); }
-  .lightbox-actions{ gap: .5rem; }
-  .lightbox-btn    { padding: .6rem 1.2rem; font-size: .88rem; }
-}
+    }
 
 /* ── TOUCH DEVICE ENHANCEMENTS ── */
 @media (hover: none) and (pointer: coarse) {
   /* Bigger tap targets on touch */
-  .tab-btn         { min-height: 44px; }
-  .action-btn      { min-height: 38px; }
+    .action-btn      { min-height: 38px; }
   .reaction-btn    { min-height: 36px; padding: .4rem .65rem; }
   .mala-btn        { min-height: 48px; }
   .admin-fab       { min-width: 48px; min-height: 48px; }
-  .lightbox-close  { min-width: 44px; min-height: 44px; display:flex; align-items:center; justify-content:center; }
-  .lb-nav          { min-width: 44px; min-height: 44px; }
-  /* Remove hover-only overlays — show action bar always on touch */
-  .gallery-card-overlay { opacity: 1; background: linear-gradient(to top,rgba(2,5,30,.92) 0%,rgba(5,10,45,.3) 40%,transparent 65%); }
-  .gallery-card-wrap:hover { transform: none; }
-  /* Disable cursor trail on touch (no mouse) */
+      /* Remove hover-only overlays — show action bar always on touch */
+      /* Disable cursor trail on touch (no mouse) */
 }
 
 /* ── SAFE AREA for iPhone notch / home bar ── */
@@ -1435,37 +1245,6 @@ img  { max-width: 100%; height: auto; display: block; }
 .map-temple-desc { font-family:'Cormorant Garamond',serif; font-size:1rem; color:rgba(180,205,255,.8); line-height:1.7; }
 
 /* ════════ DATE FILTER & VISITOR DARSHAN SELECTOR ════════ */
-.darshan-filter-bar {
-  max-width: 900px; margin: 0 auto 1.5rem; display: flex;
-  align-items: center; justify-content: center; gap: .8rem; flex-wrap: wrap;
-  padding: .8rem 1.2rem; background: rgba(6,10,45,.7);
-  border: 1px solid rgba(100,130,220,.2); border-radius: 12px;
-}
-.darshan-filter-label {
-  font-family: 'Cormorant Garamond', serif; font-size: .88rem;
-  color: rgba(160,190,255,.65); letter-spacing: .1em; white-space: nowrap;
-}
-.darshan-date-input {
-  background: rgba(8,14,55,.7); border: 1px solid rgba(100,140,220,.3);
-  border-radius: 6px; padding: .45rem .9rem; color: #C8D4FF;
-  font-family: 'Cormorant Garamond', serif; font-size: .95rem;
-  outline: none; cursor: pointer; transition: border-color .3s;
-  color-scheme: dark;
-}
-.darshan-date-input:focus { border-color: rgba(140,170,255,.65); }
-.darshan-date-clear {
-  padding: .4rem 1rem; background: rgba(255,80,80,.1);
-  border: 1px solid rgba(255,100,100,.3); color: #FF9999;
-  font-family: 'Cormorant Garamond', serif; font-size: .85rem;
-  border-radius: 20px; cursor: pointer; transition: all .25s; white-space: nowrap;
-}
-.darshan-date-clear:hover { background: rgba(255,80,80,.22); }
-.darshan-date-clear.hidden { display: none; }
-.darshan-filter-result {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
-  font-size: .85rem; color: rgba(140,190,255,.6); letter-spacing: .06em;
-  text-align: center; min-height: 1.2em; margin-bottom: .5rem;
-}
 
 /* ════════ 10. PHOTO FRAME ════════ */
 #frame-section { background:linear-gradient(180deg,rgba(3,5,20,0),rgba(10,14,60,.3),rgba(3,5,20,0)); }
@@ -1591,7 +1370,6 @@ img  { max-width: 100%; height: auto; display: block; }
 .mala-diary-empty{text-align:center;color:rgba(160,220,240,.35);font-family:'Cormorant Garamond',serif;font-style:italic;padding:2rem;}
 html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 * { min-width: 0; }
-.gallery-grid { grid-template-columns: repeat(auto-fill, minmax(min(280px, 45vw), 1fr)); }
 #malaCanvas   { max-width: min(420px, 88vw); max-height: min(420px, 88vw); }
 .mala-wrap    { padding: 0 1rem; }
 .timings-grid { grid-template-columns: repeat(auto-fill, minmax(min(200px, 42vw), 1fr)); }
@@ -1601,8 +1379,6 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 .diya-slot    { width: min(72px, 13vw); height: min(72px, 13vw); font-size: min(1.8rem, 5vw); }
 .card-controls{ grid-template-columns: repeat(auto-fill, minmax(min(220px, 90vw), 1fr)); }
 .share-platforms { grid-template-columns: repeat(auto-fill, minmax(min(120px, 28vw), 1fr)); }
-.darshan-tabs { gap: min(1rem, 2vw); }
-.tab-btn      { padding: min(.75rem,2.5vw) min(1.8rem,4vw); font-size: clamp(.78rem, 2.2vw, 1rem); }
 .visitor-strip{ gap: min(2.5rem, 5vw); padding: 1.2rem min(2rem, 5vw); }
 .timer-display{ gap: min(1.5rem, 4vw); }
 .timer-num    { font-size: clamp(2rem, 7vw, 4.5rem); }
@@ -1611,6 +1387,98 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 }
 .frame-wrap, .card-maker-wrap, .vrindavan-map-wrap { max-width: min(780px, 95vw); }
 #blessingCanvas, #frameCanvas { width: 100% !important; height: auto !important; }
+
+
+/* ═══════════════════════════════════════════════════
+   SMOOTH REVEAL ANIMATIONS
+═══════════════════════════════════════════════════ */
+.reveal-on-scroll{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1);
+  will-change:opacity,transform;
+}
+.reveal-on-scroll.revealed{
+  opacity:1;
+  transform:translateY(0);
+}
+.reveal-on-scroll:nth-child(2){transition-delay:.08s;}
+.reveal-on-scroll:nth-child(3){transition-delay:.16s;}
+.reveal-on-scroll:nth-child(4){transition-delay:.24s;}
+.reveal-on-scroll:nth-child(5){transition-delay:.32s;}
+.reveal-on-scroll:nth-child(6){transition-delay:.40s;}
+
+/* ═══════════════════════════════════════════════════
+   GPU ACCELERATION & PERFORMANCE
+═══════════════════════════════════════════════════ */
+.divine-glow-ring,
+.hero-aurora,
+.om-symbol,
+.hero-title,
+#cosmicCanvas,
+.mandala-wreath,
+.hero-petal,
+.petal {
+  will-change:transform,opacity;
+  backface-visibility:hidden;
+}
+
+/* Smooth font rendering */
+body{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+
+/* ═══════════════════════════════════════════════════
+   SMOOTH INTERACTIONS
+═══════════════════════════════════════════════════ */
+#navbar{transition:background .35s ease,box-shadow .35s ease,backdrop-filter .35s ease;}
+
+a,button{
+  transition:transform .22s cubic-bezier(.34,1.56,.64,1),
+             box-shadow .22s ease,
+             background .22s ease,
+             border-color .22s ease,
+             opacity .22s ease;
+}
+a:active,button:active{transform:scale(.97) !important;}
+
+.timing-card{
+  transition:transform .35s cubic-bezier(.22,1,.36,1),
+             box-shadow .35s ease,
+             border-color .35s ease !important;
+}
+.timing-card:hover{transform:translateY(-6px) scale(1.01);}
+
+.tstat{
+  transition:transform .3s cubic-bezier(.22,1,.36,1),
+             box-shadow .3s ease,
+             border-color .3s ease !important;
+}
+
+/* Shloka card content fade */
+.shloka-sanskrit,.shloka-meaning{
+  transition:opacity .45s ease,transform .45s ease;
+}
+
+/* Smooth section entrance */
+#shloka-section,#trending-strip,#timings,#about,#mala-section{
+  transition:opacity .5s ease;
+}
+
+/* ═══════════════════════════════════════════════════
+   REDUCE MOTION ACCESSIBILITY
+═══════════════════════════════════════════════════ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+  html{scroll-behavior:auto;}
+  .reveal-on-scroll{opacity:1;transform:none;}
+}
 
 </style>
 </head>
@@ -1630,7 +1498,6 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
     <li><a href="#hero">Home</a></li>
     <li><a href="#about">Parichay</a></li>
     <li><a href="#timings">Aarti</a></li>
-    <li><a href="#darshan">Darshan</a></li>
     <li><a href="#shloka-section">Shloka</a></li>
     <li><a href="#mala-section">Japa Mala</a></li>
     <li><a href="#ashirwad-section">Ashirwad</a></li>
@@ -1643,71 +1510,98 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
   </ul>
 </nav>
 
-<!-- HERO — Sacred Cinema -->
-<section id="hero">
+<!-- HERO — Divine Immersive Landing (Customized 2026) -->
+<section id="hero" aria-label="Shree Radha Raman Ji — Welcome">
+
+  <!-- Atmospheric layers -->
   <div class="hero-bg-layer"></div>
   <div class="hero-stars"></div>
+  <div class="hero-aurora" aria-hidden="true"></div>
 
-  <!-- Sacred mandala rings — deep violet -->
-  <div class="divine-glow-ring" style="width:280px;height:280px;top:52%;left:50%;animation-duration:4.5s;"></div>
-  <div class="divine-glow-ring" style="width:520px;height:520px;top:52%;left:50%;animation-duration:6s;animation-delay:.8s;"></div>
-  <div class="divine-glow-ring" style="width:800px;height:800px;top:52%;left:50%;animation-duration:8s;animation-delay:1.6s;"></div>
+  <!-- 4 pulse rings -->
+  <div class="divine-glow-ring" style="width:240px;height:240px;top:52%;left:50%;animation-duration:4.5s;"></div>
+  <div class="divine-glow-ring" style="width:460px;height:460px;top:52%;left:50%;animation-duration:6s;animation-delay:.8s;"></div>
+  <div class="divine-glow-ring" style="width:720px;height:720px;top:52%;left:50%;animation-duration:8s;animation-delay:1.6s;"></div>
+  <div class="divine-glow-ring" style="width:980px;height:980px;top:52%;left:50%;animation-duration:10.5s;animation-delay:2.4s;opacity:.08;"></div>
 
-  <!-- Floating petals — mix of lotus & stars -->
-  <span class="hero-petal" style="left:5%;animation-duration:10s;animation-delay:0s;">🪷</span>
-  <span class="hero-petal" style="left:15%;animation-duration:14s;animation-delay:1.5s;">✨</span>
-  <span class="hero-petal" style="left:28%;animation-duration:9s;animation-delay:3s;">🌸</span>
-  <span class="hero-petal" style="left:44%;animation-duration:11s;animation-delay:5s;">🪷</span>
-  <span class="hero-petal" style="left:58%;animation-duration:13s;animation-delay:.8s;">✨</span>
-  <span class="hero-petal" style="left:72%;animation-duration:10s;animation-delay:2.5s;">🌸</span>
-  <span class="hero-petal" style="left:85%;animation-duration:12s;animation-delay:4s;">🪷</span>
-  <span class="hero-petal" style="left:95%;animation-duration:8s;animation-delay:6s;">✨</span>
+  <!-- Floating petals — injected by JS below -->
+  <div id="hero-petals-container" aria-hidden="true"></div>
 
-  <!-- Temple silhouette — violet glow -->
-  <svg class="temple-silhouette" viewBox="0 0 1000 400" fill="currentColor">
-    <polygon points="500,10 530,120 520,120 540,200 460,200 480,120 470,120" opacity=".9"/>
-    <rect x="440" y="200" width="120" height="30" rx="2"/><rect x="420" y="230" width="160" height="30" rx="2"/>
-    <rect x="400" y="260" width="200" height="40" rx="2"/>
-    <polygon points="320,80 340,160 330,160 345,220 295,220 310,160 300,160" opacity=".7"/>
-    <polygon points="680,80 700,160 690,160 705,220 655,220 670,160 660,160" opacity=".7"/>
-    <polygon points="180,140 195,190 188,190 200,240 160,240 172,190 165,190" opacity=".5"/>
-    <polygon points="820,140 835,190 828,190 840,240 800,240 812,190 805,190" opacity=".5"/>
-    <rect x="250" y="300" width="500" height="20"/><rect x="200" y="320" width="600" height="20"/>
-    <rect x="100" y="340" width="800" height="60"/><rect x="0" y="380" width="1000" height="20"/>
-    <circle cx="500" cy="60" r="6" fill="rgba(200,120,255,.6)"/><circle cx="500" cy="60" r="3" fill="rgba(255,215,0,.8)"/>
-    <circle cx="320" cy="100" r="4" fill="rgba(180,100,255,.5)"/><circle cx="680" cy="100" r="4" fill="rgba(180,100,255,.5)"/>
+  <!-- Enhanced temple silhouette -->
+  <svg class="temple-silhouette" viewBox="0 0 1000 400" fill="currentColor" aria-hidden="true">
+    <polygon points="500,8 532,118 522,118 542,198 458,198 478,118 468,118" opacity=".95"/>
+    <rect x="438" y="198" width="124" height="30" rx="2"/><rect x="418" y="228" width="164" height="30" rx="2"/>
+    <rect x="398" y="258" width="204" height="42" rx="2"/>
+    <polygon points="318,75 340,158 330,158 346,220 294,220 310,158 300,158" opacity=".75"/>
+    <polygon points="682,75 704,158 694,158 710,220 658,220 674,158 664,158" opacity=".75"/>
+    <polygon points="178,138 195,190 188,190 200,242 158,242 170,190 163,190" opacity=".52"/>
+    <polygon points="822,138 839,190 832,190 844,242 802,242 814,190 807,190" opacity=".52"/>
+    <rect x="248" y="298" width="504" height="20"/><rect x="198" y="318" width="604" height="20"/>
+    <rect x="98" y="338" width="804" height="62"/><rect x="0" y="380" width="1000" height="20"/>
+    <circle cx="500" cy="55" r="6" fill="rgba(220,140,255,.65)"/>
+    <circle cx="500" cy="55" r="3" fill="rgba(255,220,0,.9)"/>
+    <circle cx="318" cy="97" r="4.5" fill="rgba(200,120,255,.55)"/>
+    <circle cx="682" cy="97" r="4.5" fill="rgba(200,120,255,.55)"/>
   </svg>
 
   <div class="hero-content">
-    <span class="om-symbol">ॐ</span>
-    <h1 class="hero-title">SHREE</h1>
-    <div class="hero-subtitle-devanagari">राधा रमण जी — वृंदावन धाम</div>
-    <div class="hero-subtitle">Radha Raman Ji &nbsp;·&nbsp; Vrindavan Dham</div>
 
-    <div class="hero-ornament">
+    <span class="om-symbol" aria-label="Om">ॐ</span>
+
+    <!-- Title with spinning lotus wreath -->
+    <div class="title-wrap">
+      <svg class="mandala-wreath" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g opacity=".32">
+          <ellipse cx="200" cy="60" rx="192" ry="53" stroke="rgba(255,215,0,.38)" stroke-width=".8" stroke-dasharray="4 7"/>
+          <circle cx="200" cy="7" r="4" fill="rgba(255,200,80,.55)"/>
+          <circle cx="200" cy="113" r="4" fill="rgba(255,200,80,.55)"/>
+          <circle cx="8" cy="60" r="4" fill="rgba(255,200,80,.32)"/>
+          <circle cx="392" cy="60" r="4" fill="rgba(255,200,80,.32)"/>
+          <circle cx="104" cy="13" r="3" fill="rgba(255,180,100,.45)"/>
+          <circle cx="296" cy="13" r="3" fill="rgba(255,180,100,.45)"/>
+          <circle cx="104" cy="107" r="3" fill="rgba(255,180,100,.45)"/>
+          <circle cx="296" cy="107" r="3" fill="rgba(255,180,100,.45)"/>
+          <circle cx="33" cy="29" r="2.5" fill="rgba(255,215,0,.28)"/>
+          <circle cx="367" cy="29" r="2.5" fill="rgba(255,215,0,.28)"/>
+          <circle cx="33" cy="91" r="2.5" fill="rgba(255,215,0,.28)"/>
+          <circle cx="367" cy="91" r="2.5" fill="rgba(255,215,0,.28)"/>
+          <text x="55" y="23" fill="rgba(255,215,0,.38)" font-size="8" text-anchor="middle">✦</text>
+          <text x="345" y="23" fill="rgba(255,215,0,.38)" font-size="8" text-anchor="middle">✦</text>
+          <text x="55" y="103" fill="rgba(255,215,0,.38)" font-size="8" text-anchor="middle">✦</text>
+          <text x="345" y="103" fill="rgba(255,215,0,.38)" font-size="8" text-anchor="middle">✦</text>
+        </g>
+      </svg>
+      <h1 class="hero-title">SHREE</h1>
+    </div>
+
+    <div class="hero-subtitle-devanagari">राधा रमण जी — वृंदावन धाम</div>
+    <div class="hero-subtitle">Radha Raman Ji &nbsp;·&nbsp; Vrindavan Dham &nbsp;·&nbsp; Est. 1542 CE</div>
+
+    <!-- Gold ornament -->
+    <div class="hero-ornament" aria-hidden="true">
       <span class="hero-ornament-line"></span>
       <span class="hero-ornament-lotus">🪷</span>
       <span class="hero-ornament-lotus" style="font-size:.65rem;opacity:.4;">✦</span>
-      <span class="hero-ornament-lotus" style="font-size:1.3rem;">ॐ</span>
+      <span class="hero-ornament-lotus" style="font-family:'Noto Serif Devanagari',serif;font-size:1.3rem;">ॐ</span>
       <span class="hero-ornament-lotus" style="font-size:.65rem;opacity:.4;">✦</span>
       <span class="hero-ornament-lotus">🪷</span>
       <span class="hero-ornament-line"></span>
     </div>
 
     <!-- ══ LIVE VRINDAVAN TIME BAR ══ -->
-    <div id="live-aura-bar">
+    <div id="live-aura-bar" role="status" aria-live="polite" aria-atomic="true">
       <div class="aura-dot" id="auraDot"></div>
       <span class="aura-label" id="auraLabel">Loading Vrindavan Time…</span>
       <span class="aura-countdown" id="auraCountdown"></span>
     </div>
 
     <!-- ══ LIVE AARTI COUNTDOWN ══ -->
-    <div class="hero-aarti-box">
+    <div class="hero-aarti-box" role="region" aria-label="Live aarti status" aria-live="polite">
       <span class="hero-aarti-now-label">अभी चल रहा है &nbsp;·&nbsp; Live Now in Vrindavan</span>
       <span class="hero-aarti-now-name" id="heroAartiCurrentName">Loading…</span>
       <span class="hero-aarti-now-hindi" id="heroAartiCurrentHindi">—</span>
       <div class="hero-aarti-next-row">
-        <div class="hero-aarti-dot"></div>
+        <div class="hero-aarti-dot" aria-hidden="true"></div>
         <span class="hero-aarti-next-label">अगली —</span>
         <span class="hero-aarti-next-name" id="heroAartiNextName">—</span>
         <span class="hero-aarti-next-label">in</span>
@@ -1715,14 +1609,20 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
       </div>
     </div>
 
-    <div class="hero-cta-row">
-      <a class="hero-cta-primary" href="#darshan">🪷 &nbsp; Darshan Karo</a>
-      <a class="hero-cta-secondary" href="#timings">🕐 &nbsp; All Timings</a>
+    <!-- ══ STAT PILLS ══ -->
+    <div class="hero-stat-pills" role="list" aria-label="Temple highlights">
+      <div class="hero-pill" role="listitem" style="animation-duration:3.1s"><span aria-hidden="true">🕯️</span><span id="heroPillDiyas">Diyas</span></div>
+      <div class="hero-pill" role="listitem" style="animation-duration:3.8s"><span aria-hidden="true">🪷</span><span>Est. 1542 CE</span></div>
+      <div class="hero-pill" role="listitem" style="animation-duration:4.4s"><span aria-hidden="true">📿</span><span id="heroPillMalas">Japa Mala</span></div>
+      <div class="hero-pill" role="listitem" style="animation-duration:3.5s"><span aria-hidden="true">🌸</span><span>5 Sevas Daily</span></div>
+      <div class="hero-pill" role="listitem" style="animation-duration:4.1s"><span aria-hidden="true">🙏</span><span id="heroPillPrayers">Prayers</span></div>
     </div>
-  </div>
 
-  <div class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">
-    <span>Aage Badhein</span><div class="scroll-arrow"></div>
+    <!-- ══ CTA BUTTONS ══ -->
+    <div class="hero-cta-row">
+      <a class="hero-cta-primary" href=")"
+       role="button" aria-label="Scroll down" tabindex="0">
+    <span>आगे बढ़ें</span><div class="scroll-arrow"></div>
   </div>
 </section>
 
@@ -1836,57 +1736,6 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
   </div>
 </section>
 
-<!-- DARSHAN GALLERY -->
-<section id="darshan">
-  <div class="section-header">
-    <span class="section-eyebrow">दर्शन गैलरी</span>
-    <h2 class="section-title">Darshan Gallery</h2>
-    <div class="section-divider"><div class="divider-lotus">🌸</div></div>
-    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(255,248,231,.55);max-width:500px;margin:0 auto;font-size:1.05rem;">Divine darshan photos — download & share the blessings with the world.</p>
-  </div>
-  <!-- Upload zone — only visible in admin mode -->
-  <div class="upload-zone" id="uploadZone">
-    <input type="file" id="fileInput" accept="image/*" multiple>
-    <span class="upload-icon">🪷</span>
-    <span class="upload-text">Upload Darshan Photos</span>
-    <span class="upload-sub">Tap to select · JPG, PNG, WEBP · Type select hoga automatically</span>
-  </div>
-  <!-- Upload progress bar -->
-  <div class="upload-progress" id="uploadProgress">
-    <div class="upload-progress-label" id="uploadLabel">Uploading to cloud… 0%</div>
-    <div class="upload-progress-bar-wrap"><div class="upload-progress-bar" id="uploadBar"></div></div>
-  </div>
-  <!-- Admin sync status panel — only visible in admin mode -->
-  <div id="adminSyncPanel" style="display:none;max-width:700px;margin:0 auto 1.5rem;padding:1rem 1.4rem;background:rgba(4,8,40,.95);border:1px solid rgba(100,140,255,.3);border-radius:10px;font-family:'Cormorant Garamond',serif;font-size:.95rem;">
-    <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem;">
-      <span style="font-size:1.1rem;">🛰️</span>
-      <strong style="color:#A0C8FF;letter-spacing:.08em;">Cloud Sync Status</strong>
-      <button onclick="testCloudinaryNow()" style="margin-left:auto;padding:.3rem .9rem;background:rgba(80,140,255,.15);border:1px solid rgba(100,160,255,.35);color:#90C0FF;border-radius:6px;cursor:pointer;font-family:inherit;font-size:.85rem;">🔄 Test Now</button>
-    </div>
-    <div id="clStatus" style="margin-bottom:.4rem;">☁️ Cloudinary: <span id="clStatusText" style="color:#888;">Checking…</span></div>
-    <div id="jbStatus">📋 JSONBin: <span id="jbStatusText" style="color:#888;">Checking…</span></div>
-    <div id="lastUploadStatus" style="margin-top:.5rem;color:rgba(200,220,255,.6);font-size:.85rem;"></div>
-  </div>
-  <!-- Date Filter Bar (visible to all visitors) -->
-  <div class="darshan-filter-bar">
-    <span class="darshan-filter-label">📅 Kisi bhi din ka darshan dekhein:</span>
-    <input type="date" class="darshan-date-input" id="darshanDateFilter" title="Select date to view darshan">
-    <button class="darshan-date-clear hidden" id="darshanDateClear">✕ Clear</button>
-  </div>
-  <div class="darshan-filter-result" id="darshanFilterResult"></div>
-
-  <!-- Tabs -->
-  <div class="darshan-tabs">
-    <button class="tab-btn active" data-tab="shrinagar">✨ Shrinagar Darshan</button>
-    <button class="tab-btn" data-tab="sandhya">🌙 Sandhya Darshan</button>
-    <button class="tab-btn" data-tab="aulai">🌸 Aulai Darshan</button>
-    <button class="tab-btn" data-tab="rajbhog">🍱 Rajbhog Aarti</button>
-  </div>
-  <div class="gallery-panel active" id="panel-shrinagar"><div class="gallery-grid" id="grid-shrinagar"><div class="gallery-loading"><div class="gallery-spinner"></div><p>Loading darshan…</p></div></div></div>
-  <div class="gallery-panel" id="panel-sandhya"><div class="gallery-grid" id="grid-sandhya"><div class="gallery-loading"><div class="gallery-spinner"></div><p>Loading darshan…</p></div></div></div>
-  <div class="gallery-panel" id="panel-aulai"><div class="gallery-grid" id="grid-aulai"><div class="gallery-loading"><div class="gallery-spinner"></div><p>Loading darshan…</p></div></div></div>
-  <div class="gallery-panel" id="panel-rajbhog"><div class="gallery-grid" id="grid-rajbhog"><div class="gallery-loading"><div class="gallery-spinner"></div><p>Loading darshan…</p></div></div></div>
-</section>
 
 <!-- YOUTUBE -->
 <section id="youtube-section">
@@ -2309,18 +2158,7 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 </div>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" id="lbClose" aria-label="Close lightbox">✕</button>
-  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous image">‹</button>
-  <button class="lb-nav lb-next" id="lbNext" aria-label="Next image">›</button>
-  <img class="lightbox-img" id="lbImg" src="" alt="">
-  <div class="lightbox-info">
-    <div class="lightbox-title" id="lbTitle"></div>
-    <div class="lightbox-actions">
-      <button class="lightbox-btn" id="lbDownload">⬇ Download</button>
-      <button class="lightbox-btn lb-share" id="lbShare">↗ Share Prasad</button>
-    </div>
-  </div>
+</div>
 </div>
 
 <!-- SHARE MODAL -->
@@ -2358,954 +2196,7 @@ html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 // =====================================================================
 const IMGBB_API_KEY = 'e4d5f6a7b8c9d0e1f2a3b4c5d6e7f8a9'; // pre-configured
 // We store all photo metadata in JSONBin — same keys as before
-const JSONBIN_BIN_ID  = '6a1a8984ddf5aa59f777860d';
-const JSONBIN_API_KEY = '$2a$10$D7eOvh66OQN4JpzGr88IS.ito1NIC4DSW9FR/HkdymVfaiDcpBK1W';
-const JB_READY = true;
-// Keep Cloudinary constants for backward compat (old photos already uploaded there)
-const CLOUDINARY_CLOUD_NAME    = 'dn9ldmmxa';
-const CLOUDINARY_UPLOAD_PRESET = 'darshan_upload';
-const CL_READY = true; // try Cloudinary first, fall back to ImgBB
 
-// =====================================================================
-// ☁️  UPLOAD IMAGE — tries Cloudinary first, then ImgBB as fallback
-//     Both are free. If one fails, the other saves the day.
-// =====================================================================
-async function uploadToCloudinary(file, id) {
-  try {
-    const form = new FormData();
-    form.append('file',          file);
-    form.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-    form.append('public_id',     id);
-    form.append('folder',        'darshan');
-    const res  = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
-      method: 'POST', body: form
-    });
-    const data = await res.json();
-    if (data.secure_url) return { url: data.secure_url, error: null };
-    return { url: null, error: data?.error?.message || 'Cloudinary rejected upload' };
-  } catch(e) {
-    return { url: null, error: e.message || 'Network error' };
-  }
-}
-
-async function uploadToImgBB(file) {
-  // ImgBB free API — converts image to base64 and uploads
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      try {
-        const base64 = e.target.result.split(',')[1];
-        const form = new FormData();
-        form.append('image', base64);
-        // Use a reliable free ImgBB API key
-        const res = await fetch('https://api.imgbb.com/1/upload?key=2e49e4076c88c65e2536a78bf7461f07', {
-          method: 'POST', body: form
-        });
-        const data = await res.json();
-        if (data.success && data.data && data.data.url) {
-          resolve({ url: data.data.display_url || data.data.url, error: null });
-        } else {
-          resolve({ url: null, error: data?.error?.message || 'ImgBB upload failed' });
-        }
-      } catch(err) {
-        resolve({ url: null, error: err.message });
-      }
-    };
-    reader.readAsDataURL(file);
-  });
-}
-
-// Main upload function — tries Cloudinary, falls back to ImgBB
-async function uploadImageToCloud(file, id) {
-  // Try Cloudinary first
-  const clResult = await uploadToCloudinary(file, id);
-  if (clResult.url) return { url: clResult.url, service: 'cloudinary', error: null };
-
-  // Cloudinary failed — try ImgBB
-  const ibResult = await uploadToImgBB(file);
-  if (ibResult.url) return { url: ibResult.url, service: 'imgbb', error: null };
-
-  // Both failed
-  return { url: null, service: null, error: `Cloudinary: ${clResult.error} | ImgBB: ${ibResult.error}` };
-}
-
-// ── Test connections and update admin status panel ──
-async function testCloudinaryNow() {
-  const clText = document.getElementById('clStatusText');
-  const jbText = document.getElementById('jbStatusText');
-  if (clText) clText.innerHTML = '<span style="color:#FFD700">Testing…</span>';
-  if (jbText) jbText.innerHTML = '<span style="color:#FFD700">Testing…</span>';
-
-  // Test Cloudinary
-  try {
-    const tiny = await fetch('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==');
-    const blob = await tiny.blob();
-    const testFile = new File([blob], 'test.png', { type: 'image/png' });
-    const result = await uploadToCloudinary(testFile, 'test_ping_' + Date.now());
-    if (result.url) {
-      if (clText) clText.innerHTML = '<span style="color:#6FD98A">✅ Cloudinary Working</span>';
-    } else {
-      if (clText) clText.innerHTML = `<span style="color:#FFB347">⚠️ Cloudinary: ${result.error} — ImgBB fallback ready ✅</span>`;
-    }
-  } catch(e) {
-    if (clText) clText.innerHTML = `<span style="color:#FFB347">⚠️ Cloudinary error — ImgBB fallback active</span>`;
-  }
-
-  // Test JSONBin
-  try {
-    const res = await fetch(`https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}/latest`, {
-      headers: { 'X-Master-Key': JSONBIN_API_KEY }
-    });
-    if (res.ok) {
-      if (jbText) jbText.innerHTML = '<span style="color:#6FD98A">✅ JSONBin Working — All devices will sync</span>';
-    } else {
-      const err = await res.json();
-      if (jbText) jbText.innerHTML = `<span style="color:#FF6B6B">❌ JSONBin HTTP ${res.status}: ${err?.message || 'Check API key'}</span>`;
-    }
-  } catch(e) {
-    if (jbText) jbText.innerHTML = `<span style="color:#FF6B6B">❌ JSONBin Error: ${e.message}</span>`;
-  }
-}
-
-async function deleteFromCloudinary(publicId) {
-  console.info('Delete from Cloudinary Media Library manually if needed.');
-}
-
-// =====================================================================
-// 📋 JSONBIN — Store photo metadata so all devices see the same gallery
-// =====================================================================
-const JB_BASE = 'https://api.jsonbin.io/v3/b';
-const JB_CACHE_KEY = 'shree_jb_cache';
-const JB_CACHE_TTL = 15 * 1000; // 15 seconds — faster refresh for new photos
-
-async function loadFromJSONBin() {
-  if (!JB_READY) return null;
-  try {
-    const cached = JSON.parse(localStorage.getItem(JB_CACHE_KEY) || 'null');
-    if (cached && (Date.now() - cached.ts) < JB_CACHE_TTL) {
-      return cached.data;
-    }
-  } catch(_) {}
-  try {
-    const res  = await fetch(`${JB_BASE}/${JSONBIN_BIN_ID}/latest`, {
-      headers: { 'X-Master-Key': JSONBIN_API_KEY }
-    });
-    const data = await res.json();
-    const record = data.record || {};
-    const photos = Array.isArray(record.photos) ? record.photos
-                 : Array.isArray(record)         ? record
-                 : [];
-    localStorage.setItem(JB_CACHE_KEY, JSON.stringify({ ts: Date.now(), data: photos }));
-    return photos;
-  } catch(e) {
-    return null;
-  }
-}
-
-async function saveToJSONBin(allPhotos) {
-  if (!JB_READY) return;
-  try {
-    await fetch(`${JB_BASE}/${JSONBIN_BIN_ID}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_API_KEY },
-      body: JSON.stringify({ photos: allPhotos, version: 1, updatedAt: Date.now() })
-    });
-    localStorage.removeItem(JB_CACHE_KEY);
-    allPhotosCache = null;
-  } catch(e) {
-    console.warn('JSONBin save failed:', e.message);
-    throw e; // re-throw so caller knows
-  }
-}
-
-// In-memory cache of ALL photos across tabs
-let allPhotosCache = null;
-
-async function getAllPhotos() {
-  let local = [];
-  try { local = JSON.parse(localStorage.getItem('shree_photos_v3') || '[]'); } catch { local = []; }
-
-  try {
-    const remote = await loadFromJSONBin();
-    if (remote && remote.length > 0) {
-      const normalized = remote.map(p => ({
-        ...p,
-        thumb: p.thumb || (p.src.startsWith('http') ? p.src : p.thumb)
-      }));
-      // Merge: cloud is source of truth, but keep any local-only photos
-      const cloudIds = new Set(normalized.map(p => p.id));
-      const localOnly = local.filter(p => !cloudIds.has(p.id));
-      allPhotosCache = [...normalized, ...localOnly].sort((a, b) => b.ts - a.ts);
-      // Sync merged list back to local
-      saveAllPhotosLocal(allPhotosCache);
-      return allPhotosCache;
-    }
-  } catch(_) { /* cloud unavailable — use local silently */ }
-
-  allPhotosCache = local;
-  return allPhotosCache;
-}
-
-function saveAllPhotosLocal(photos) {
-  try {
-    // Keep only metadata + thumb (no full base64 if cloudinary URL exists)
-    const light = photos.map(p => ({ ...p, thumb: p.src.startsWith('http') ? '' : p.thumb }));
-    localStorage.setItem('shree_photos_v3', JSON.stringify(light));
-  } catch(e) {}
-}
-
-async function persistAllPhotos(photos) {
-  allPhotosCache = photos;
-  saveAllPhotosLocal(photos);
-  await saveToJSONBin(photos);
-}
-const DB_NAME    = 'ShreeDarshanDB';
-const DB_VERSION = 2;
-const STORE_NAME = 'photos';
-let db = null;
-
-function openDB() {
-  return new Promise((resolve, reject) => {
-    if (db) { resolve(db); return; }
-    const req = indexedDB.open(DB_NAME, DB_VERSION);
-    req.onupgradeneeded = e => {
-      const database = e.target.result;
-      if (!database.objectStoreNames.contains(STORE_NAME)) {
-        const store = database.createObjectStore(STORE_NAME, { keyPath: 'id' });
-        store.createIndex('tab', 'tab', { unique: false });
-        store.createIndex('ts',  'ts',  { unique: false });
-      }
-    };
-    req.onsuccess = e => { db = e.target.result; resolve(db); };
-    req.onerror   = e => { console.error('IndexedDB error:', e); reject(e); };
-  });
-}
-
-async function savePhotoDB(photo) {
-  const database = await openDB();
-  return new Promise((resolve, reject) => {
-    const tx = database.transaction(STORE_NAME, 'readwrite');
-    tx.objectStore(STORE_NAME).put(photo);
-    tx.oncomplete = resolve;
-    tx.onerror    = reject;
-  });
-}
-
-async function deletePhotoDB(id) {
-  const database = await openDB();
-  return new Promise((resolve, reject) => {
-    const tx = database.transaction(STORE_NAME, 'readwrite');
-    tx.objectStore(STORE_NAME).delete(id);
-    tx.oncomplete = resolve;
-    tx.onerror    = reject;
-  });
-}
-
-async function getPhotosByTab(tab) {
-  const database = await openDB();
-  return new Promise((resolve, reject) => {
-    const tx    = database.transaction(STORE_NAME, 'readonly');
-    const store = tx.objectStore(STORE_NAME);
-    const idx   = store.index('tab');
-    const req   = idx.getAll(IDBKeyRange.only(tab));
-    req.onsuccess = e => {
-      // sort newest first
-      const sorted = (e.target.result || []).sort((a, b) => b.ts - a.ts);
-      resolve(sorted);
-    };
-    req.onerror = reject;
-  });
-}
-
-// =====================================================================
-// 🔑 ADMIN PASSWORD — stored as SHA-256 hash (not plain text)
-// To change password: generate SHA-256 hash of your new password at
-// sha256.online and replace the hash string below.
-// Current password: aditya2010[jha]
-// =====================================================================
-const ADMIN_PASS_HASH = '9f9c1b3e942b119eecff7eb6c7e3c0037f4b105a20a0aac749d4d90ae08ce115';
-
-async function checkAdminPassword(input) {
-  const msgBuffer = new TextEncoder().encode(input);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashHex = hashArray.map(b => b.toString(16).padStart(2,'0')).join('');
-  return hashHex === ADMIN_PASS_HASH;
-}
-
-// =====================================================================
-// ☁️  FIREBASE STORAGE UPLOAD — Photos stored permanently in the cloud
-// Every device that opens the website sees the same photos.
-// =====================================================================
-async function uploadToFirebase(file, id) { return null; } // kept for compat
-
-// =====================================================================
-// 🔥 FIRESTORE — replaced by Cloudinary + JSONBin (see above)
-// =====================================================================
-
-// =====================================================================
-// 📅 DATE HELPERS
-// =====================================================================
-const DAYS_HI   = ['रविवार','सोमवार','मंगलवार','बुधवार','गुरुवार','शुक्रवार','शनिवार'];
-const DAYS_EN   = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const MONTHS_EN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-
-function formatDateInfo(ts) {
-  const d = new Date(ts);
-  return {
-    dayHi : DAYS_HI[d.getDay()],
-    dayEn : DAYS_EN[d.getDay()],
-    dateEn: `${d.getDate()} ${MONTHS_EN[d.getMonth()]} ${d.getFullYear()}`,
-    full  : d.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'}),
-    ts
-  };
-}
-
-// =====================================================================
-// 🗜️  IMAGE COMPRESSION
-// =====================================================================
-function compressImage(dataUrl, maxW = 1200, quality = 0.82) {
-  return new Promise(resolve => {
-    const img = new Image();
-    img.onload = () => {
-      const scale = Math.min(1, maxW / img.width);
-      const c = document.createElement('canvas');
-      c.width  = Math.round(img.width  * scale);
-      c.height = Math.round(img.height * scale);
-      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-      resolve(c.toDataURL('image/jpeg', quality));
-    };
-    img.src = dataUrl;
-  });
-}
-
-// =====================================================================
-// 🗂️  GALLERY STATE
-// =====================================================================
-const galleryData = { shrinagar:[], sandhya:[], aulai:[], rajbhog:[] };
-const tabNames    = { shrinagar:'Shrinagar Darshan', sandhya:'Sandhya Darshan', aulai:'Aulai Darshan', rajbhog:'Rajbhog Aarti' };
-const tabIcons    = { shrinagar:'🪷', sandhya:'🌙', aulai:'🌸', rajbhog:'🍱' };
-let activeTab      = 'shrinagar';
-let lightboxImages = [], lightboxIndex = 0, currentShareData = null;
-
-// =====================================================================
-// 😊 REACTIONS — localStorage (lightweight, per-device)
-// =====================================================================
-const REACT_EMOJIS = [
-  { emoji:'🙏', label:'Jai Shree' },
-  { emoji:'❤️', label:'Love'      },
-  { emoji:'🪷', label:'Lotus'     },
-  { emoji:'✨', label:'Divine'    }
-];
-
-function getReactionCounts() { try { return JSON.parse(localStorage.getItem('shree_rx_counts')||'{}'); } catch { return {}; } }
-function getMyReactions()    { try { return JSON.parse(localStorage.getItem('shree_rx_mine'  )||'{}'); } catch { return {}; } }
-function saveReactionCounts(d) { try { localStorage.setItem('shree_rx_counts', JSON.stringify(d)); } catch {} }
-function saveMyReactions(d)    { try { localStorage.setItem('shree_rx_mine',   JSON.stringify(d)); } catch {} }
-
-function toggleReaction(photoId, emoji) {
-  const counts = getReactionCounts();
-  const mine   = getMyReactions();
-  if (!counts[photoId]) counts[photoId] = {};
-  if (!mine[photoId])   mine[photoId]   = [];
-  const already = mine[photoId].includes(emoji);
-  if (already) {
-    counts[photoId][emoji] = Math.max(0, (counts[photoId][emoji]||1) - 1);
-    mine[photoId] = mine[photoId].filter(e => e !== emoji);
-  } else {
-    counts[photoId][emoji] = (counts[photoId][emoji]||0) + 1;
-    mine[photoId].push(emoji);
-  }
-  saveReactionCounts(counts); saveMyReactions(mine);
-  const bar = document.getElementById('react-' + photoId);
-  if (bar) bar.innerHTML = buildReactionsHTML(photoId);
-}
-
-function buildReactionsHTML(photoId) {
-  const counts = getReactionCounts()[photoId] || {};
-  const mine   = (getMyReactions()[photoId]   || []);
-  return REACT_EMOJIS.map(r => {
-    const n = counts[r.emoji] || 0;
-    const a = mine.includes(r.emoji) ? 'reacted' : '';
-    return `<button class="reaction-btn ${a}" onclick="toggleReaction('${photoId}','${r.emoji}');event.stopPropagation();" title="${r.label}">
-      <span class="react-emoji">${r.emoji}</span>
-      <span class="react-count">${n > 0 ? n : ''}</span>
-    </button>`;
-  }).join('');
-}
-
-// =====================================================================
-// 📥 LOAD PHOTOS — with AUTO-EXPIRY filter
-// Photos uploaded on a specific date show ONLY on that date (default view).
-// When date filter is active, that date's photos show.
-// =====================================================================
-function getTodayDateStr() {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-function getPhotoDateStr(ts) {
-  const d = new Date(ts);
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-}
-
-async function loadPhotos(tab) {
-  const grid = document.getElementById('grid-' + tab);
-  if (grid) grid.innerHTML = `<div class="gallery-loading"><div class="gallery-spinner"></div><p>Loading darshan…</p></div>`;
-  try {
-    const all = await getAllPhotos();
-    const today = getTodayDateStr();
-    // If date filter active → show that date. Otherwise → show only TODAY (auto-expiry).
-    const targetDate = activeDateFilter || today;
-    galleryData[tab] = all.filter(p => {
-      if (p.tab !== tab) return false;
-      return getPhotoDateStr(p.ts) === targetDate;
-    }).sort((a,b) => b.ts - a.ts);
-    renderGallery(tab);
-  } catch(e) {
-    try {
-      const all = await getPhotosByTab(tab);
-      const today = getTodayDateStr();
-      const targetDate = activeDateFilter || today;
-      galleryData[tab] = all.filter(p => getPhotoDateStr(p.ts) === targetDate).sort((a,b) => b.ts - a.ts);
-    } catch(_) { galleryData[tab] = []; }
-    renderGallery(tab);
-  }
-}
-
-// =====================================================================
-// 📤 UPLOAD — with Darshan Type Selector Modal
-// =====================================================================
-const uploadZone = document.getElementById('uploadZone');
-const fileInput  = document.getElementById('fileInput');
-
-// Pending files held until type is chosen
-let _pendingFiles = null;
-let _chosenUploadType = null;
-
-// --- Type selector modal logic ---
-const uploadTypeModal   = document.getElementById('uploadTypeModal');
-const uploadTypeConfirm = document.getElementById('uploadTypeConfirm');
-const uploadTypeCancel  = document.getElementById('uploadTypeCancel');
-
-document.querySelectorAll('.upload-type-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.upload-type-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    _chosenUploadType = btn.dataset.type;
-    uploadTypeConfirm.disabled = false;
-  });
-});
-
-uploadTypeConfirm.addEventListener('click', () => {
-  if (!_chosenUploadType || !_pendingFiles) return;
-  // Switch active tab to match chosen type
-  activeTab = _chosenUploadType;
-  document.querySelectorAll('.tab-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.tab === activeTab);
-  });
-  document.querySelectorAll('.gallery-panel').forEach(p => {
-    p.classList.toggle('active', p.id === 'panel-' + activeTab);
-  });
-  uploadTypeModal.classList.remove('open');
-  document.body.style.overflow = '';
-  handleFiles(_pendingFiles);
-  _pendingFiles = null;
-  _chosenUploadType = null;
-  // Reset modal state
-  document.querySelectorAll('.upload-type-btn').forEach(b => b.classList.remove('selected'));
-  uploadTypeConfirm.disabled = true;
-});
-
-uploadTypeCancel.addEventListener('click', () => {
-  uploadTypeModal.classList.remove('open');
-  document.body.style.overflow = '';
-  _pendingFiles = null;
-  _chosenUploadType = null;
-  document.querySelectorAll('.upload-type-btn').forEach(b => b.classList.remove('selected'));
-  uploadTypeConfirm.disabled = true;
-  if (fileInput) fileInput.value = '';
-});
-
-function openUploadTypeModal(files) {
-  _pendingFiles = files;
-  _chosenUploadType = null;
-  uploadTypeConfirm.disabled = true;
-  document.querySelectorAll('.upload-type-btn').forEach(b => b.classList.remove('selected'));
-  uploadTypeModal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-if (uploadZone) {
-  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
-  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
-  uploadZone.addEventListener('drop', e => {
-    e.preventDefault(); uploadZone.classList.remove('dragover');
-    openUploadTypeModal(e.dataTransfer.files);
-  });
-}
-if (fileInput) fileInput.addEventListener('change', e => {
-  if (e.target.files.length) openUploadTypeModal(e.target.files);
-});
-
-async function handleFiles(files) {
-  const arr = [...files].filter(f => f.type.startsWith('image/'));
-  if (!arr.length) return;
-
-  const bar   = document.getElementById('uploadBar');
-  const label = document.getElementById('uploadLabel');
-
-  // Load current photo list so we can append
-  const allPhotos = await getAllPhotos();
-
-  for (let i = 0; i < arr.length; i++) {
-    const file = arr[i];
-    if (bar)   bar.style.width = Math.round((i / arr.length) * 35) + '%';
-    if (label) label.textContent = `Reading photo ${i+1} of ${arr.length}…`;
-
-    const dataUrl = await new Promise(res => {
-      const r = new FileReader();
-      r.onload = e => res(e.target.result);
-      r.readAsDataURL(file);
-    });
-
-    if (label) label.textContent = `Compressing photo ${i+1}…`;
-    const compressed = await compressImage(dataUrl);
-
-    // Use today's date as the photo timestamp (for auto-expiry)
-    const now = Date.now();
-    const dateInfo = formatDateInfo(now);
-    const id = 'p_' + now + '_' + Math.random().toString(36).slice(2,6);
-
-    let finalSrc = null;
-    let uploadedToCloud = false;
-
-    // ── Step 1: Upload image — tries Cloudinary first, then ImgBB ──
-    if (label) label.textContent = `☁️ Uploading to cloud… ${i+1}/${arr.length}`;
-    if (bar)   bar.style.width = '50%';
-    const result = await uploadImageToCloud(file, id);
-    if (result.url) {
-      finalSrc = result.url;
-      uploadedToCloud = true;
-      if (label) label.textContent = `✅ Cloud upload done! (via ${result.service})`;
-    } else {
-      const errEl = document.getElementById('lastUploadStatus');
-      if (errEl) errEl.innerHTML = `<span style="color:#FF6B6B">❌ Upload failed: ${result.error}</span>`;
-      showToast(`❌ Upload failed — photo sirf is device pe saved`);
-      finalSrc = compressed;
-    }
-
-    const photo = {
-      id,
-      src      : finalSrc,
-      thumb    : compressed,
-      name     : file.name,
-      tab      : activeTab,
-      label    : tabNames[activeTab],
-      dayHi    : dateInfo.dayHi,
-      dayEn    : dateInfo.dayEn,
-      dateEn   : dateInfo.dateEn,
-      dateFull : dateInfo.full,
-      ts       : now,
-      uploadedAt: now
-    };
-
-    // ── Step 2: Always save locally ──
-    if (label) label.textContent = `💾 Saving on device…`;
-    allPhotos.unshift(photo);
-    allPhotosCache = allPhotos;
-    saveAllPhotosLocal(allPhotos);
-    try { await savePhotoDB(photo); } catch(_) {}
-
-    // ── Step 3: Sync metadata to JSONBin — all devices will see this photo ──
-    if (uploadedToCloud && JB_READY) {
-      if (label) label.textContent = `🌍 Syncing to all devices…`;
-      if (bar)   bar.style.width = '85%';
-      const lightPhotos = allPhotos.map(p => ({
-        ...p,
-        thumb: p.src && p.src.startsWith('http') ? p.src : ''
-      }));
-      try {
-        await saveToJSONBin(lightPhotos);
-        const errEl = document.getElementById('lastUploadStatus');
-        if (errEl) errEl.innerHTML = `<span style="color:#6FD98A">✅ Photo saved! Ab sabhi ke phone/laptop mein dikhega. Radhe Radhe! 🪷</span>`;
-        showToast(`🌍 Sabhi devices mein dikh raha hai! Radhe Radhe 🪷`);
-        localStorage.removeItem('shree_jb_cache');
-      } catch(e) {
-        const errEl = document.getElementById('lastUploadStatus');
-        if (errEl) errEl.innerHTML = `<span style="color:#FF6B6B">❌ JSONBin sync failed: ${e.message}</span>`;
-        showToast(`⚠️ JSONBin sync failed — retry karein`);
-      }
-    } else if (!uploadedToCloud) {
-      const errEl = document.getElementById('lastUploadStatus');
-      if (errEl) errEl.innerHTML = `<span style="color:#FFB347">⚠️ Cloud upload failed. Photo sirf is device par dikh raha hai.</span>`;
-    }
-
-    // Reload today's photos in the active tab
-    await loadPhotos(activeTab);
-    if (bar) bar.style.width = Math.round(((i+1) / arr.length) * 100) + '%';
-  }
-
-  if (label) label.textContent = `✨ ${arr.length} photo${arr.length>1?'s':''} saved!`;
-  if (bar)   bar.style.width = '100%';
-  setTimeout(() => {
-    if (bar)   bar.style.width = '0%';
-    if (label) label.textContent = 'Uploading… 0%';
-  }, 3000);
-  if (fileInput) fileInput.value = '';
-}
-
-// =====================================================================
-// 🗑️  DELETE — removes from gallery list permanently
-// =====================================================================
-async function deleteImage(id, tab, event) {
-  event.stopPropagation();
-  if (!isAdminMode) return;
-  if (!confirm('Kya aap is darshan photo ko sabhi devices se permanently delete karna chahte hain?')) return;
-
-  showToast('🗑️ Deleting from all devices…');
-  const errEl = document.getElementById('lastUploadStatus');
-
-  try {
-    // 1️⃣ Remove from in-memory cache immediately
-    const allPhotos = await getAllPhotos();
-    const filtered = allPhotos.filter(p => p.id !== id);
-    allPhotosCache = filtered;
-
-    // 2️⃣ Remove from localStorage
-    saveAllPhotosLocal(filtered);
-
-    // 3️⃣ Remove from IndexedDB
-    try { await deletePhotoDB(id); } catch(_) {}
-
-    // 4️⃣ Update gallery UI immediately on this device
-    galleryData[tab] = galleryData[tab].filter(p => p.id !== id);
-    renderGallery(tab);
-
-    // 5️⃣ Push deleted list to JSONBin → all other devices will see deletion on next refresh
-    if (JB_READY) {
-      const lightFiltered = filtered.map(p => ({
-        ...p,
-        thumb: p.src && p.src.startsWith('http') ? p.src : ''
-      }));
-      try {
-        await saveToJSONBin(lightFiltered);
-        // Clear local cache so other devices load fresh from JSONBin
-        localStorage.removeItem('shree_jb_cache');
-        if (errEl) errEl.innerHTML = '<span style="color:#6FD98A">✅ Photo deleted from ALL devices. Radhe Radhe! 🙏</span>';
-        showToast('✅ Sabhi devices se delete ho gaya! 🙏');
-      } catch(e) {
-        if (errEl) errEl.innerHTML = `<span style="color:#FFB347">⚠️ Local delete done. JSONBin sync failed: ${e.message}</span>`;
-        showToast('⚠️ Local se delete hua. Cloud sync failed.');
-      }
-    } else {
-      showToast('🗑️ Photo removed from this device.');
-    }
-  } catch(e) {
-    showToast('⚠️ Delete failed — try again');
-  }
-}
-
-// =====================================================================
-// 🖼️  RENDER GALLERY  (with optional date filter)
-// =====================================================================
-let activeDateFilter = null; // 'YYYY-MM-DD' or null
-
-function renderGallery(tab) {
-  const grid = document.getElementById('grid-' + tab);
-  if (!grid) return;
-  let imgs = galleryData[tab];
-
-  // Apply date filter if set
-  if (activeDateFilter) {
-    imgs = imgs.filter(img => {
-      const d = new Date(img.ts);
-      const imgDate = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-      return imgDate === activeDateFilter;
-    });
-  }
-
-  if (!imgs || imgs.length === 0) {
-    const todayLabel = new Date().toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
-    const msg = activeDateFilter
-      ? `Is date ka koi darshan photo nahi mila. Doosra date try karein 🙏`
-      : `Aaj (${todayLabel}) ka abhi koi darshan photo upload nahi hua. Purane darshan dekhne ke liye upar date select karein 🗓️`;
-    grid.innerHTML = `<div class="empty-gallery">
-      <span class="empty-gallery-icon">${tabIcons[tab]}</span>
-      <p>${msg}</p>
-    </div>`;
-    return;
-  }
-  grid.innerHTML = '';
-  imgs.forEach((img, i) => {
-    const displaySrc = img.thumb || img.src; // use local thumb for fast display
-    const wrap = document.createElement('div');
-    wrap.className = 'gallery-card-wrap';
-    wrap.innerHTML = `
-      <div class="gallery-card" id="card-${img.id}">
-        <img src="${displaySrc}" alt="${img.label}" loading="lazy">
-        <a class="card-insta-badge"
-           href="https://www.instagram.com/radha_raman_juu.darshan/"
-           target="_blank" rel="noopener noreferrer"
-           onclick="event.stopPropagation()">📸 @radha_raman_juu.darshan</a>
-        <div class="card-date-badge">
-          <span class="card-day">${img.dayHi} · ${img.dayEn}</span>
-          <span class="card-date-en">${img.dateEn}</span>
-        </div>
-        <div class="gallery-card-overlay">
-          <div class="card-title">${img.label}</div>
-          <div class="card-date-overlay">🗓 ${img.dateFull}</div>
-          <div class="card-actions">
-            <button class="action-btn" onclick="downloadImage(${i},'${tab}');event.stopPropagation()">⬇ Save</button>
-            <button class="action-btn share-btn" onclick="openShare(${i},'${tab}');event.stopPropagation()">↗ Share</button>
-            ${isAdminMode ? `<button class="action-btn delete-btn" onclick="deleteImage('${img.id}','${tab}',event)">🗑</button>` : ''}
-          </div>
-        </div>
-      </div>
-      <div class="card-reactions" id="react-${img.id}">${buildReactionsHTML(img.id)}</div>
-    `;
-    wrap.querySelector('.gallery-card').addEventListener('click', e => {
-      if (e.target.closest('.action-btn') || e.target.closest('.card-insta-badge')) return;
-      // Find real index in full galleryData (not filtered)
-      const realIndex = galleryData[tab].findIndex(p => p.id === img.id);
-      openLightbox(tab, realIndex >= 0 ? realIndex : i);
-    });
-    grid.appendChild(wrap);
-  });
-}
-
-// =====================================================================
-// DOWNLOAD
-// =====================================================================
-function downloadImage(indexOrSrc, tab) {
-  let img;
-  if (typeof indexOrSrc === 'number') {
-    img = galleryData[tab][indexOrSrc];
-  } else {
-    // legacy: src string passed directly
-    const a = document.createElement('a');
-    a.href = decodeURIComponent(indexOrSrc);
-    a.download = 'ShreeRadhaRaman_darshan.jpg';
-    a.click();
-    showToast('✨ Downloading darshan blessings…');
-    return;
-  }
-  if (!img) return;
-  const src = img.thumb || img.src;
-  if (src.startsWith('http')) {
-    fetch(src).then(r => r.blob()).then(blob => {
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'ShreeRadhaRaman_' + (img.name || 'darshan.jpg');
-      a.click();
-      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-    }).catch(() => window.open(src, '_blank'));
-  } else {
-    const a = document.createElement('a');
-    a.href = src;
-    a.download = 'ShreeRadhaRaman_' + (img.name || 'darshan.jpg');
-    a.click();
-  }
-  showToast('✨ Downloading darshan blessings…');
-}
-
-// =====================================================================
-// LIGHTBOX
-// =====================================================================
-const lightbox = document.getElementById('lightbox');
-const lbImg    = document.getElementById('lbImg');
-const lbTitle  = document.getElementById('lbTitle');
-
-function openLightbox(tab, index) {
-  lightboxImages = galleryData[tab]; lightboxIndex = index;
-  updateLightbox(); lightbox.classList.add('open'); document.body.style.overflow = 'hidden';
-}
-function updateLightbox() {
-  const img = lightboxImages[lightboxIndex];
-  if (!img) return;
-  lbImg.src = img.src;
-  lbTitle.textContent = img.label + ' — ' + img.dateFull;
-  currentShareData = img;
-}
-document.getElementById('lbClose').onclick = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; };
-document.getElementById('lbPrev').onclick  = () => { lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length; updateLightbox(); };
-document.getElementById('lbNext').onclick  = () => { lightboxIndex = (lightboxIndex + 1) % lightboxImages.length; updateLightbox(); };
-document.getElementById('lbDownload').onclick = () => { if (currentShareData) { const i = lightboxImages.indexOf(currentShareData); downloadImage(i >= 0 ? i : 0, Object.keys(galleryData).find(t=>galleryData[t].includes(currentShareData))||activeTab); } };
-document.getElementById('lbShare').onclick    = () => { if (currentShareData) triggerShare(currentShareData); };
-lightbox.addEventListener('click', e => { if (e.target === lightbox) { lightbox.classList.remove('open'); document.body.style.overflow = ''; }});
-document.addEventListener('keydown', e => {
-  if (!lightbox.classList.contains('open')) return;
-  if (e.key==='ArrowLeft')  { lightboxIndex=(lightboxIndex-1+lightboxImages.length)%lightboxImages.length; updateLightbox(); }
-  if (e.key==='ArrowRight') { lightboxIndex=(lightboxIndex+1)%lightboxImages.length; updateLightbox(); }
-  if (e.key==='Escape')     { lightbox.classList.remove('open'); document.body.style.overflow=''; }
-});
-
-// =====================================================================
-// SHARE
-// =====================================================================
-const shareModal = document.getElementById('shareModal');
-function openShare(index, tab) { currentShareData = galleryData[tab][index]; triggerShare(currentShareData); }
-function triggerShare(imgData) {
-  const text        = `🙏 Jai Shree Radha Raman Ji! Darshan from Vrindavan Dham — ${imgData.label} 🪷 #RadhaRaman #Vrindavan #SHREE`;
-  const encodedText = encodeURIComponent(text);
-  const pageUrl     = encodeURIComponent(window.location.href);
-  document.getElementById('shareWhatsapp').href  = `https://wa.me/?text=${encodedText}`;
-  document.getElementById('shareTelegram').href  = `https://t.me/share/url?url=${pageUrl}&text=${encodedText}`;
-  document.getElementById('shareTwitter').href   = `https://twitter.com/intent/tweet?text=${encodedText}`;
-  document.getElementById('shareFacebook').href  = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}&quote=${encodedText}`;
-  document.getElementById('shareLinkInput').value = text;
-  document.getElementById('shareNative').onclick = async e => {
-    e.preventDefault();
-    if (navigator.share) { try { await navigator.share({ title:'SHREE — Darshan', text, url: window.location.href }); } catch {} }
-    else showToast('Use the copy button or platform buttons above');
-  };
-  shareModal.classList.add('open'); document.body.style.overflow = 'hidden';
-}
-document.getElementById('shareClose').onclick = () => { shareModal.classList.remove('open'); document.body.style.overflow=''; };
-shareModal.addEventListener('click', e => { if (e.target===shareModal) { shareModal.classList.remove('open'); document.body.style.overflow=''; }});
-document.getElementById('copyLinkBtn').onclick = () => {
-  const t = document.getElementById('shareLinkInput').value;
-  navigator.clipboard.writeText(t)
-    .then(() => showToast('🙏 Copied! Spread the prasad!'))
-    .catch(() => { document.getElementById('shareLinkInput').select(); document.execCommand('copy'); showToast('🙏 Copied!'); });
-};
-
-// =====================================================================
-// ADMIN MODE
-// =====================================================================
-let isAdminMode = false;
-const adminFab       = document.getElementById('adminFab');
-const adminModal     = document.getElementById('adminModal');
-const adminPassInput = document.getElementById('adminPassInput');
-const adminErrorMsg  = document.getElementById('adminErrorMsg');
-const adminBadge     = document.getElementById('adminBadge');
-
-adminFab.addEventListener('click', () => {
-  if (isAdminMode) {
-    isAdminMode = false;
-    document.body.classList.remove('admin-mode');
-    adminFab.classList.remove('admin-active');
-    adminFab.textContent = '🔐'; adminFab.title = 'Admin Panel';
-    adminBadge.classList.remove('visible');
-    showToast('🔒 Admin mode disabled');
-    Object.keys(galleryData).forEach(renderGallery);
-  } else {
-    adminModal.classList.add('open'); document.body.style.overflow='hidden';
-    setTimeout(() => adminPassInput.focus(), 200);
-  }
-});
-
-async function tryAdminLogin() {
-  const input = adminPassInput.value.trim();
-  const correct = await checkAdminPassword(input);
-  if (correct) {
-    isAdminMode = true;
-    document.body.classList.add('admin-mode');
-    adminFab.classList.add('admin-active');
-    adminFab.textContent = '🛡'; adminFab.title = 'Click to exit admin mode';
-    adminBadge.classList.add('visible');
-    adminModal.classList.remove('open'); document.body.style.overflow = '';
-    adminPassInput.value = ''; adminErrorMsg.textContent = '';
-    showToast('🛡 Admin mode enabled — Jai Shree Radha Raman!');
-    Object.keys(galleryData).forEach(renderGallery);
-    // Auto-test cloud connections when admin logs in
-    setTimeout(testCloudinaryNow, 500);
-  } else {
-    adminPassInput.classList.add('error');
-    adminErrorMsg.textContent = '❌ Incorrect password. Try again.';
-    adminPassInput.value = '';
-    setTimeout(() => adminPassInput.classList.remove('error'), 500);
-  }
-}
-document.getElementById('adminLoginBtn').addEventListener('click', tryAdminLogin);
-adminPassInput.addEventListener('keydown', e => { if (e.key==='Enter') tryAdminLogin(); });
-document.getElementById('adminClose').addEventListener('click', () => {
-  adminModal.classList.remove('open'); document.body.style.overflow='';
-  adminPassInput.value=''; adminErrorMsg.textContent='';
-});
-adminModal.addEventListener('click', e => {
-  if (e.target===adminModal) { adminModal.classList.remove('open'); document.body.style.overflow=''; adminPassInput.value=''; adminErrorMsg.textContent=''; }
-});
-
-// =====================================================================
-// TAB SWITCHING
-// =====================================================================
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.gallery-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    activeTab = btn.dataset.tab;
-    document.getElementById('panel-' + activeTab).classList.add('active');
-  });
-});
-
-// =====================================================================
-// 📅 DATE FILTER — visitors can browse darshan by date
-// =====================================================================
-(function initDateFilter() {
-  const dateInput  = document.getElementById('darshanDateFilter');
-  const clearBtn   = document.getElementById('darshanDateClear');
-  const resultEl   = document.getElementById('darshanFilterResult');
-  if (!dateInput) return;
-
-  // Set max date to today
-  const today = new Date();
-  const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
-  dateInput.max = todayStr;
-
-  function applyFilter(dateVal) {
-    activeDateFilter = dateVal || null;
-    // Bust the JSONBin cache so we fetch fresh data
-    localStorage.removeItem('shree_jb_cache');
-    allPhotosCache = null;
-    if (dateVal) {
-      clearBtn.classList.remove('hidden');
-      const d = new Date(dateVal + 'T00:00:00');
-      const label2 = d.toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-      if (resultEl) resultEl.textContent = `📅 ${label2} ka darshan load ho raha hai…`;
-    } else {
-      clearBtn.classList.add('hidden');
-      if (resultEl) resultEl.textContent = '';
-    }
-    // Reload all tabs fresh from cloud with the new date filter
-    Object.keys(galleryData).forEach(tab => loadPhotos(tab));
-    // Update result text after load
-    if (dateVal) {
-      setTimeout(() => {
-        const d = new Date(dateVal + 'T00:00:00');
-        const label2 = d.toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
-        let totalCount = 0;
-        Object.keys(galleryData).forEach(tab => { totalCount += (galleryData[tab]||[]).length; });
-        if (resultEl) resultEl.textContent = totalCount > 0
-          ? `📸 ${label2} — ${totalCount} darshan photo${totalCount > 1 ? 's' : ''} mila 🙏`
-          : `📅 ${label2} — Is din ka koi darshan photo nahi mila`;
-      }, 2500);
-    }
-  }
-
-  dateInput.addEventListener('change', e => applyFilter(e.target.value));
-  clearBtn.addEventListener('click', () => {
-    dateInput.value = '';
-    applyFilter('');
-  });
-})();
-
-// =====================================================================
-// TOAST
-// =====================================================================
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-// =====================================================================
-// COSMIC CANVAS
-// =====================================================================
-const canvas = document.getElementById('cosmicCanvas');
-const ctx    = canvas.getContext('2d');
-let W, H, stars=[], diyas=[];
-function resizeCanvas() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
 function initStars() {
   stars = [];
   const count = Math.floor((W*H)/3000);
@@ -3348,10 +2239,29 @@ function drawCosmic() {
   const bg=ctx.createRadialGradient(W/2,0,0,W/2,0,H*.9);
   bg.addColorStop(0,`rgba(212,175,55,${.05+.025*Math.sin(af*.4)})`); bg.addColorStop(.35,`rgba(184,134,11,.015)`); bg.addColorStop(1,'transparent');
   ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
-  requestAnimationFrame(drawCosmic);
+  if (!document.hidden) requestAnimationFrame(drawCosmic);
+  else setTimeout(() => requestAnimationFrame(drawCosmic), 500);
 }
+document.addEventListener('visibilitychange', () => { if (!document.hidden) drawCosmic(); });
+// Hero petals
+(function spawnHeroPetals(){
+  const hpc = document.getElementById('hero-petals-container');
+  if (!hpc) return;
+  const p = ['🪷','✨','🌸','🌼','✦'];
+  for(let i=0;i<12;i++){
+    const s=document.createElement('span');
+    s.className='hero-petal';
+    s.textContent=p[i%p.length];
+    s.style.cssText=`left:${5+i*7.5}%;font-size:${0.7+Math.random()*.7}rem;animation-duration:${9+Math.random()*8}s;animation-delay:${Math.random()*10}s;`;
+    hpc.appendChild(s);
+  }
+})();
 resizeCanvas(); initStars(); initDiyas(); drawCosmic();
-window.addEventListener('resize', () => { resizeCanvas(); initStars(); initDiyas(); });
+let _resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(_resizeTimer);
+  _resizeTimer = setTimeout(() => { resizeCanvas(); initStars(); initDiyas(); }, 180);
+}, { passive: true });
 
 // PETALS
 const petalC = document.getElementById('petals-container');
@@ -3364,11 +2274,11 @@ function createPetal() {
   petalC.appendChild(el);
   setTimeout(() => el.remove(), 20000);
 }
-setInterval(createPetal, 600);
-for (let i=0;i<12;i++) setTimeout(createPetal, i*300);
+setInterval(() => { if ((petalC?.children.length||0) < 18) createPetal(); }, 700);
+for (let i=0;i<10;i++) setTimeout(createPetal, i*250);
 
 // NAVBAR
-window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 80); });
+window.addEventListener('scroll', () => { document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 80); }, { passive: true });
 
 // TEMPLE CARD SHIMMER
 const shimmerCard = document.getElementById('shimmer-card');
@@ -3378,19 +2288,15 @@ document.querySelector('.temple-card')?.addEventListener('mousemove', e => {
   shimmerCard.style.setProperty('--y', ((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
 });
 
-// ENTRANCE ANIMATIONS
-const obsOpts = { threshold:.15 };
+// ENTRANCE ANIMATIONS — class-based (no inline style override)
 const obs = new IntersectionObserver(entries => {
-  entries.forEach(en => {
-    if (en.isIntersecting) { en.target.style.transition='opacity 1s ease,transform 1s ease'; en.target.style.opacity='1'; en.target.style.transform='translateY(0)'; }
-  });
-}, obsOpts);
-document.querySelectorAll('.timing-card,.about-text,.about-ornament').forEach(el => {
-  el.style.opacity='0'; el.style.transform='translateY(30px)'; obs.observe(el);
+  entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('revealed'); obs.unobserve(en.target); } });
+}, { threshold:.12, rootMargin:'0px 0px -40px 0px' });
+document.querySelectorAll('.timing-card,.about-text,.about-ornament,.tstat,.shloka-card,.aarti-card').forEach(el => {
+  el.classList.add('reveal-on-scroll'); obs.observe(el);
 });
 
 // INIT
-Object.keys(galleryData).forEach(tab => loadPhotos(tab));
 
 // ═══════════════════════════════════════════════════════════════════
 // 🕐 LIVE VRINDAVAN TIME AURA — World's first temple time-reactive site

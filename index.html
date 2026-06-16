@@ -45,17 +45,8 @@
 <meta name="twitter:image:alt" content="Shree Radha Raman Ji Vrindavan Dham">
 
 <!-- ═══════════════════════════════════════════
-     PWA MANIFEST
+     FAVICON
 ═══════════════════════════════════════════ -->
-<link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
-<link rel="apple-touch-startup-image" href="icons/icon-512.png">
-<link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Radha Raman Ji">
-<meta name="mobile-web-app-capable" content="yes">
 
 <!-- ═══════════════════════════════════════════
      PERFORMANCE — Preconnect & Resource Hints
@@ -182,34 +173,6 @@
     }
   ]
 }
-</script>
-
-<!-- PWA: Service Worker + Install Prompt -->
-<script>
-// ── Service Worker Registration ──────────────────────────────────────
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js')
-      .then(reg => console.log('🙏 SW registered, scope:', reg.scope))
-      .catch(err => console.warn('SW registration failed:', err));
-  });
-}
-
-// ── Install Prompt ───────────────────────────────────────────────────
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  const btn = document.getElementById('pwaInstallBtn');
-  if (btn) btn.style.display = 'flex';
-});
-window.addEventListener('appinstalled', () => {
-  deferredPrompt = null;
-  const btn = document.getElementById('pwaInstallBtn');
-  if (btn) btn.style.display = 'none';
-  if (typeof showToast === 'function') showToast('🪷 App installed! Jai Radha Raman Ji!');
-  if (typeof trackEvent === 'function') trackEvent('pwa_install', 'engagement', 'App Installed');
-});
 </script>
 
 <style>
@@ -631,9 +594,6 @@ section{position:relative;z-index:2;}
 .share-close{position:absolute;top:1rem;right:1.5rem;background:none;border:none;color:rgba(255,248,231,.5);font-size:1.5rem;cursor:pointer;transition:color .2s;}
 .share-close:hover{color:var(--gold);}
 
-/* PWA Install Button */
-#pwaInstallBtn{display:none;position:fixed;bottom:2rem;right:2rem;z-index:499;align-items:center;gap:.5rem;background:linear-gradient(135deg,#005870,#00A0B0);border:1px solid rgba(0,200,220,.4);border-radius:28px;color:#E0FFFF;font-family:'Cinzel Decorative',cursive;font-size:.65rem;letter-spacing:.08em;padding:.55rem 1.1rem;cursor:pointer;box-shadow:0 4px 20px rgba(0,180,200,.4);transition:color .3s,background-color .3s,border-color .3s,box-shadow .3s,transform .3s,opacity .3s;}
-#pwaInstallBtn:hover{transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,200,220,.55);}
 /* FOOTER */
 footer{padding:4rem 2rem 2rem;text-align:center;background:linear-gradient(to top,rgba(3,5,25,.7),rgba(5,8,35,.35),transparent);position:relative;z-index:2;}
 .footer-om{font-family:'Noto Serif Devanagari',serif;font-size:2.5rem;color:#A0B8FF;text-shadow:0 0 20px rgba(120,160,255,.5);display:block;margin-bottom:1rem;}
@@ -2010,13 +1970,6 @@ footer { background: linear-gradient(to top, rgba(5,1,0,.8), rgba(10,2,0,.45), t
 .footer-copy { color: rgba(180,120,50,.35) !important; }
 .footer-mantra { color: rgba(200,140,50,.55) !important; }
 
-/* ── PWA INSTALL BUTTON ────────────────────────────────────────── */
-#pwaInstallBtn {
-  background: linear-gradient(135deg, rgba(150,60,0,.85), rgba(100,30,0,.8)) !important;
-  border-color: rgba(220,140,0,.45) !important;
-  color: #FFD700 !important;
-}
-
 /* ── MALA DIARY OVERLAY ────────────────────────────────────────── */
 .mala-diary-overlay { background: rgba(5,1,0,.9) !important; }
 .mala-diary-close { color: rgba(200,130,50,.45) !important; }
@@ -2029,7 +1982,7 @@ footer { background: linear-gradient(to top, rgba(5,1,0,.8), rgba(10,2,0,.45), t
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   PWA & ALL-DEVICE RESPONSIVE FIXES (Complete Overhaul 2026)
+   ALL-DEVICE RESPONSIVE FIXES (Complete Overhaul 2026)
    Covers: 320px–2560px, portrait+landscape, notch/safe-area
 ═══════════════════════════════════════════════════════════════ */
 
@@ -2038,7 +1991,7 @@ footer { background: linear-gradient(to top, rgba(5,1,0,.8), rgba(10,2,0,.45), t
 html {
   -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
   scroll-behavior: smooth;
-  /* PWA: fill safe-area on all sides */
+  /* fill safe-area on all sides for notched phones */
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 }
@@ -2053,18 +2006,6 @@ input, button, textarea, select { font-family: inherit; }
 /* Touch targets min 44×44px */
 button, a, [role="button"] { min-height: 44px; min-width: 44px; }
 .shloka-dot, .shloka-nav-btn { min-height: 36px; min-width: 36px; }
-
-/* ── PWA STANDALONE: hide browser chrome UI elements if needed ── */
-@media (display-mode: standalone) {
-  nav { padding-top: max(1rem, env(safe-area-inset-top)); }
-  body { padding-bottom: env(safe-area-inset-bottom); }
-  #pwaInstallBtn {
-    bottom: max(1.5rem, calc(env(safe-area-inset-bottom) + 1.2rem));
-  }
-  .toast {
-    bottom: max(2rem, calc(env(safe-area-inset-bottom) + 1.5rem));
-  }
-}
 
 /* ── 4K / WIDE SCREENS (≥1600px) ── */
 @media (min-width: 1600px) {
@@ -2231,8 +2172,6 @@ button, a, [role="button"] { min-height: 44px; min-width: 44px; }
   .aura-label { font-size: .8rem; }
   .aura-countdown { font-size: .72rem; }
 
-  #pwaInstallBtn { bottom: 1.5rem; right: 1rem; font-size: .6rem; padding: .5rem .9rem; }
-
   .footer-subtitle { font-size: .8rem; }
 
   /* Share modal */
@@ -2329,7 +2268,7 @@ button, a, [role="button"] { min-height: 44px; min-width: 44px; }
 /* ── PRINT ── */
 @media print {
   #cosmicCanvas, #petals-container, nav,
-  #pwaInstallBtn, .scroll-indicator, .cursor-particle { display: none !important; }
+  .scroll-indicator, .cursor-particle { display: none !important; }
   body { background: white !important; color: black !important; }
 }
 
@@ -2913,8 +2852,6 @@ button, a, [role="button"] { min-height: 44px; min-width: 44px; }
     </div>
   </div>
 </section>
-
-<button id="pwaInstallBtn" style="display:none;" onclick="if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(()=>{deferredPrompt=null;this.style.display='none';});}">📲 Install App</button>
 
 <!-- FOOTER -->
 </main>

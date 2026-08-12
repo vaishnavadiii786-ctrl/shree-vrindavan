@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vaishnavadiii786-ctrl.github.io/shree-vrindavan/sitemap.xml
